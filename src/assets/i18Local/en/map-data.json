@@ -1,0 +1,14 @@
+{
+  "mapData": {
+    "buttons": {
+      "home": "Center",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out"
+    },
+    "sidebar": {
+      "controls": "Controls",
+      "weatherConditions": "Weather Conditions",
+      "styleTile": "Style Tile"
+    }
+  }
+}

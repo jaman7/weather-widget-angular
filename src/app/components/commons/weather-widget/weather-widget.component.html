@@ -1,0 +1,8 @@
+<div class="widget-container">
+  <div class="widget" *ngFor="let city of selectedCities$ | async; trackByIndex" (click)="openCity(city.id)">
+    <h3 class="city">{{ city.city }}</h3>
+    <img class="img-fluid" [src]="city.icon" alt="city.description" />
+    <span class="temperature">{{ city.temp.toFixed(1) }}°C</span>
+    <span class="description">{{ city.description }}</span>
+  </div>
+</div>

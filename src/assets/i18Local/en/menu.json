@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "home": {
+      "title": "Home"
+    },
+    "example": {
+      "title": "Item"
+    }
+  }
+}

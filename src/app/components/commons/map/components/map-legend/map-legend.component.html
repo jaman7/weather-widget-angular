@@ -1,0 +1,11 @@
+<ng-container *ngIf="legend && getScaleDetails(legend) as scaleDetails">
+  <div class="legend-container">
+    <span class="legend-title">{{ scaleDetails.title }}</span>
+    <div class="legend-gradient" style="width: 260px">
+      <div class="horizontal-gradient-line" [ngStyle]="{ backgroundImage: scaleDetails.gradient }"></div>
+      <div class="legend-dividers">
+        <span class="dividers" *ngFor="let divider of scaleDetails.dividers; trackByIndex">{{ divider }}</span>
+      </div>
+    </div>
+  </div>
+</ng-container>

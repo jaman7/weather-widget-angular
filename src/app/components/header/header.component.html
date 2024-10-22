@@ -1,0 +1,14 @@
+<nav class="header">
+  <ul class="menu">
+    <ng-container *ngFor="let item of menuItems; trackByIndex">
+      <li
+        [routerLink]="item?.children ? null : navigate(item)"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [id]="item.id"
+      >
+        <span>{{ item.title | translate }}</span>
+      </li>
+    </ng-container>
+  </ul>
+</nav>

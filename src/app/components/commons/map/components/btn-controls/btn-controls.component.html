@@ -1,0 +1,57 @@
+<div class="map-sidebar">
+  <ul class="sidebar-menu" [@expandCollapseHorizontal]="(collapsedSidebarRight$ | async) ? 'final' : 'initial'">
+    <ng-container *ngTemplateOutlet="nodes; context: { $implicit: sidebarRightConfig }"></ng-container>
+  </ul>
+
+  <div class="open-mapsidebar" [ngClass]="(collapsedSidebarRight$ | async) ? 'open' : ''">
+    <app-button [isRound]="true" (btnClick)="openSideBar()">
+      <i nz-icon nzType="double-left" [ngClass]="(collapsedSidebarRight$ | async) ? 'open' : ''"></i>
+    </app-button>
+  </div>
+</div>
+
+<ng-template #nodes let-menu>
+  <ng-container *ngFor="let item of menu; index as i; trackByIndex">
+    <li>
+      <p class="title">{{ item.title | translate }}</p>
+      <div *ngIf="item?.type === 'button'" class="btn-controls">
+        <app-button
+          *ngFor="let btn of item.children; trackByIndex"
+          [ngClass]="['top-btn']"
+          [isRound]="true"
+          class="btn-root"
+          className="{{ btn?.additionalClass ?? '' }} {{ btn.selected ? 'active' : '' }}"
+          [nzTooltipTitle]="'mapData.buttons.' + btn?.tooltipTitle | translate"
+          nzTooltipOverlayClassName="tooltip-btn-left"
+          nz-tooltip
+          [nzTooltipPlacement]="btn?.tooltipPlacement ?? 'left'"
+          (btnClick)="onButtonControlAction(btn?.id)"
+        >
+          <i nz-icon [nzType]="btn?.iconType"></i>
+        </app-button>
+      </div>
+
+      <nz-radio-group
+        *ngIf="item?.type === 'radio-item' && item?.typeCheckbox === 'weather'"
+        class="tile-list"
+        [(ngModel)]="selectedTileLayer"
+        (ngModelChange)="onWeatherLayerChange($event)"
+      >
+        <label nz-radio *ngFor="let layer of item.children; trackByIndex" [nzValue]="layer">
+          {{ layer.name }}
+        </label>
+      </nz-radio-group>
+
+      <nz-radio-group
+        *ngIf="item?.type === 'radio-item' && item?.typeCheckbox === 'tile'"
+        class="tile-list"
+        [(ngModel)]="selectedBackgroundLayer"
+        (ngModelChange)="onTileLayerChange($event)"
+      >
+        <label nz-radio *ngFor="let layer of item.children; trackByIndex" [nzValue]="layer.value">
+          {{ layer.name }}
+        </label>
+      </nz-radio-group>
+    </li>
+  </ng-container>
+</ng-template>

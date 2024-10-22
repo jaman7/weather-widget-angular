@@ -1,0 +1,28 @@
+.widget {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+  font-family: var(--font-roboto);
+  cursor: pointer;
+
+  &-container {
+    display: flex;
+  }
+
+  & .city,
+  & .temperature,
+  & .description {
+    text-align: center;
+    color: var(--color-orange);
+    font-size: 1.5rem;
+  }
+
+  .temperature {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+}
