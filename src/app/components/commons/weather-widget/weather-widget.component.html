@@ -1,7 +1,37 @@
 <div class="widget-container">
+  <div class="progress-container">
+    <div class="progress">
+      <span class="title">Next to refresh</span>
+      <svg viewBox="0 0 36 36" class="circular-chart">
+        <path
+          class="circle"
+          [attr.stroke-dasharray]="(refreshProgress$ | async) + ', 100'"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+      </svg>
+      <span class="countdown">{{ refreshCountdown$ | async }}s</span>
+    </div>
+
+    <div class="progress">
+      <span class="title">Next to random city</span>
+      <svg viewBox="0 0 36 36" class="circular-chart">
+        <path
+          class="circle"
+          [attr.stroke-dasharray]="(citySelectionProgress$ | async) + ', 100'"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+      </svg>
+      <span class="countdown">{{ citySelectionCountdown$ | async }}s</span>
+    </div>
+  </div>
   <div class="widget" *ngFor="let city of selectedCities$ | async; trackByIndex" (click)="openCity(city.id)">
     <h3 class="city">{{ city.city }}</h3>
-    <img class="img-fluid" [src]="city.icon" alt="city.description" />
+    <div class="flex-center"><img class="img-fluid" [src]="city.icon" alt="city.description" /></div>
+
     <span class="temperature">{{ city.temp.toFixed(1) }}°C</span>
     <span class="description">{{ city.description }}</span>
   </div>
