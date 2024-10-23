@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { combineLatest, map, Observable, of, shareReplay, switchMap, timer } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IWeatherData } from './weather-widget.model';
@@ -11,6 +11,8 @@ import { WeatherWidgetService } from './weather-widget.service';
   styleUrl: './weather-widget.component.scss',
 })
 export class WeatherWidgetComponent extends WeatherWidgetService implements OnInit {
+  @Input() cities: string[] = [];
+
   public selectedCities$: Observable<IWeatherData[]> = of([]);
 
   currentCities: string[] = [];
@@ -69,8 +71,7 @@ export class WeatherWidgetComponent extends WeatherWidgetService implements OnIn
   }
 
   getRandomCities(): string[] {
-    const shuffled = [...this.cities].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    return this.cities?.length ? [...this.cities].sort(() => 0.5 - Math.random())?.slice(0, 3) : [];
   }
 
   openCity(id: number): void {

@@ -8,8 +8,6 @@ import { IWeatherData } from './weather-widget.model';
   providedIn: 'root',
 })
 export abstract class WeatherWidgetService extends HttpService {
-  cities = ['Lodz', 'Warszawa', 'Berlin', 'New York', 'London'];
-
   API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
   private API_KEY = 'ae98d58d517252f2065829367d320dbb';
