@@ -1,0 +1,11 @@
+<div #popup id="popup" class="ol-popup">
+  <app-button class="button-close" [isRound]="true" tooltipTitle="mapData.buttons.close" (btnClick)="closePopup()">
+    <i nz-icon nzType="close"></i>
+  </app-button>
+  <div *ngIf="weatherData$ | async as data">
+    <p class="text">Temperature: {{ data.temp }}°C</p>
+    <p class="orange-text m-0">Wind: {{ data.wind }} m/s</p>
+    <p class="orange-text m-0">Cloud cover: {{ data.clouds }}%</p>
+    <p class="orange-text m-0">Pressure: {{ data.pressure }} hPa</p>
+  </div>
+</div>

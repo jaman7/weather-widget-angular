@@ -53,6 +53,7 @@ $button-round-font-size-12: 12px;
     padding: 0;
     display: flex;
     align-items: center;
+    box-shadow: 0 0 6px 0 var(--shadow-color) !important;
 
     i {
       font-size: $button-round-font-size-12;

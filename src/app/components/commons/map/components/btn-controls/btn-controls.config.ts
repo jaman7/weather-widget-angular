@@ -1,9 +1,8 @@
 import { OSM, XYZ } from 'ol/source';
 import TileLayer from 'ol/layer/Tile';
+import { API_KEY } from '@app/components/commons/map/map.constants';
 import { ButtonsControl, MapButtonsIcons, MapButtonsTooltip } from './btn-controls.enums';
 import { ISidebarConfig } from './btn-controls.models';
-
-const API_KEY = 'ae98d58d517252f2065829367d320dbb';
 
 const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 const { HOME_TOOLTIP, ZOOM_IN_TOOLTIP, ZOOM_OUT_TOOLTIP } = MapButtonsTooltip;

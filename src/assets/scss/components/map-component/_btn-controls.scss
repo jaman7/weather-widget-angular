@@ -38,6 +38,10 @@
       color: var(--color-blue);
       background-color: transparent !important;
       font-size: 1.5rem;
+
+      &:hover {
+        color: var(--color-white);
+      }
     }
   }
 

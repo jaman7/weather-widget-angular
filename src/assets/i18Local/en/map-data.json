@@ -3,7 +3,8 @@
     "buttons": {
       "home": "Center",
       "zoomIn": "Zoom In",
-      "zoomOut": "Zoom Out"
+      "zoomOut": "Zoom Out",
+      "close": "Close"
     },
     "sidebar": {
       "controls": "Controls",
