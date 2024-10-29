@@ -1,16 +1,9 @@
 import { HttpParams } from '@angular/common/http';
-import moment from 'moment';
 import { IParams } from './http.model';
 
 export function preparedHttpParamsValue(value: any): string {
   if (value instanceof String) {
     return value.toString();
-  }
-  if (moment.isMoment(value)) {
-    return value.format('DD-MM-YYYY');
-  }
-  if (value instanceof Date) {
-    return moment(value).format('DD-MM-YYYY');
   }
   if (Array.isArray(value)) {
     return value.join('&');
