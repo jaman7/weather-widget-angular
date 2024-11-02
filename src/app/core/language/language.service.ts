@@ -4,7 +4,7 @@ import { catchError, distinctUntilChanged, filter, map, tap } from 'rxjs/operato
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import build from '../../../environments/build.json';
+import build from '@env/build.json';
 import { AppState, selectLanguageState } from '../core.state';
 
 const DEFAULT_LANGUAGE = 'en';
@@ -27,7 +27,7 @@ export class LanguageService {
     select(selectLanguageState),
     distinctUntilChanged(),
     filter(Boolean),
-    tap(language => {
+    tap((language) => {
       this.translate.use(language || DEFAULT_LANGUAGE);
       this.loadPartials([...this.initialPartials]);
     })
@@ -36,7 +36,7 @@ export class LanguageService {
   loadPartials(partials: string[] = []): Promise<boolean> {
     if (!partials.length) return Promise.resolve(true);
     return lastValueFrom(
-      forkJoin(partials.map(partial => this.fetchPartial(partial))).pipe(
+      forkJoin(partials.map((partial) => this.fetchPartial(partial))).pipe(
         map(() => true),
         catchError(() => of(true))
       )
@@ -48,7 +48,7 @@ export class LanguageService {
     this.downloadedPartials.add(partial);
     const buildTimestamp = new Date(build.timestamp).getTime();
     return this.http.get<any>(`assets/i18Local/${lang}/${partial}.json?v=${buildTimestamp}`).pipe(
-      tap(response => {
+      tap((response) => {
         const translations = {
           ...this.translate.translations[lang],
           ...this.translations[lang],
@@ -57,7 +57,7 @@ export class LanguageService {
         this.translations[lang] = translations;
         this.translate.setTranslation(lang, translations);
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error(`Failed to load partial ${partial}:`, error);
         return of(null);
       })

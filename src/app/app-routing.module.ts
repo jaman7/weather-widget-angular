@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterConfigOptions, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [];
 
+const routerOptions: RouterConfigOptions = {
+  onSameUrlNavigation: 'reload',
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
