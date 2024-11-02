@@ -17,9 +17,7 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const metaReducers: MetaReducer<AppState>[] = [initStateFromLocalStorage];
 
-if (!env.production) {
-  metaReducers.unshift(debugReducer);
-}
+if (!env.production) metaReducers.unshift(debugReducer);
 
 export const selectLanguageState = createFeatureSelector<Language>('language');
 

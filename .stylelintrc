@@ -23,5 +23,6 @@
     "no-descending-specificity": null,
     "selector-class-pattern": null,
     "scss/no-global-function-names": null,
+    "color-no-invalid-hex": true
   }
 }

@@ -12,11 +12,16 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier:format": "prettier --write --html-whitespace-sensitivity ignore src/**/*{.ts,.json,.css,.scss,.html}",
-    "prepare": "husky install .husky"
+    "prepare": "husky .husky"
   },
   "private": true,
   "lint-staged": {
-    "{,src/**/}*.{md,json,ts,css,scss,yml}": [
+    "*.{js,jsx,ts,tsx,yml,html,md,json}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
       "git add"
     ]
   },
@@ -73,7 +78,7 @@
     "eslint-plugin-jasmine": "^4.2.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-protractor": "^2.1.1",
-    "husky": "^9.1.5",
+    "husky": "^9.1.6",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -81,15 +86,14 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^15.2.10",
-    "postcss": "^8.4.45",
+    "postcss": "^8.4.47",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
-    "scss-reset": "^1.4.2",
-    "stylelint": "^16.9.0",
+    "stylelint": "^16.10.0",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "^5.5.4"
   },
   "recommendations": [
     "esbenp.prettier-vscode",

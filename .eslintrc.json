@@ -154,7 +154,8 @@
           }
         ],
         "no-undef": "error",
-        "no-restricted-syntax": "off"
+        "no-restricted-syntax": "off",
+        "@typescript-eslint/no-empty-function": "warn"
       }
     },
     {
