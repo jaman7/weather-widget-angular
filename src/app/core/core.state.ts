@@ -25,3 +25,5 @@ if (!env.production) {
 export const selectLanguageState = createFeatureSelector<Language>('language');
 
 export const selectRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
+
+export const APP_PREFIX = 'test-APP';

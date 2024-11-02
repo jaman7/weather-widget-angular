@@ -54,7 +54,6 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sidebarRightConfig = [];
-    this.sidebarRightConfig = [];
     if (this.layerUpdateSubscription) this.layerUpdateSubscription.unsubscribe();
   }
 

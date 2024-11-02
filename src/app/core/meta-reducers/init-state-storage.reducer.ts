@@ -1,11 +1,9 @@
-/* eslint-disable import/no-cycle */
 import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
 import { toCamelCase } from '@app/shared/utils/string-utils';
-import { AppState } from '../core.state';
-import { APP_PREFIX } from '../local-storage/local-storage.service';
+import { APP_PREFIX, AppState } from '../core.state';
 
 export function getStateKeys(storageKey: string): string[] {
-  return storageKey.replace(APP_PREFIX, '').toLowerCase().split('.').map(toCamelCase);
+  return storageKey?.replace(APP_PREFIX, '')?.toLowerCase()?.split('.')?.map(toCamelCase) ?? [];
 }
 
 function safelyParseJSON(jsonString: string): any {
@@ -18,18 +16,14 @@ function safelyParseJSON(jsonString: string): any {
 
 function updateNestedState(state: any, keys: string[], value: any): any {
   return keys.reduceRight((acc, key, index) => {
-    if (index === keys.length - 1) {
-      return { ...state, [key]: value };
-    }
+    if (index === keys.length - 1) return { ...state, [key]: value };
     return { ...state, [key]: { ...state[key], ...acc } };
   }, {});
 }
 
 export function loadInitialState(): Record<string, any> {
   return Object.keys(sessionStorage).reduce((state: any, storageKey: string) => {
-    if (!storageKey.startsWith(APP_PREFIX)) {
-      return state;
-    }
+    if (!storageKey.startsWith(APP_PREFIX)) return state;
 
     const storedItem = sessionStorage.getItem(storageKey);
     if (!storedItem) return state;

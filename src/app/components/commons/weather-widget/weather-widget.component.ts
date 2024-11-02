@@ -15,8 +15,6 @@ export class WeatherWidgetComponent extends WeatherWidgetService implements OnIn
 
   public selectedCities$: Observable<IWeatherData[]> = of([]);
 
-  currentCities: string[] = [];
-
   public refreshCountdown$: Observable<number>;
 
   public citySelectionCountdown$: Observable<number>;
@@ -58,10 +56,7 @@ export class WeatherWidgetComponent extends WeatherWidgetService implements OnIn
 
     this.selectedCities$ = citySelection$.pipe(
       untilDestroyed(this),
-      switchMap(cities => {
-        this.currentCities = cities;
-        return refresh$.pipe(switchMap(() => this.loadWeatherData(cities)));
-      })
+      switchMap(cities => refresh$.pipe(switchMap(() => this.loadWeatherData(cities))))
     );
   }
 

@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import build from '../../../environments/build.json';
 import { AppState, selectLanguageState } from '../core.state';
 
+const DEFAULT_LANGUAGE = 'en';
+
 @Injectable()
 export class LanguageService {
   private translations: { [key: string]: any } = {};
@@ -26,7 +28,7 @@ export class LanguageService {
     distinctUntilChanged(),
     filter(Boolean),
     tap(language => {
-      this.translate.use(language || 'en');
+      this.translate.use(language || DEFAULT_LANGUAGE);
       this.loadPartials([...this.initialPartials]);
     })
   );
