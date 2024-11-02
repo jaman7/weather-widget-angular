@@ -2,13 +2,12 @@ import { ActionReducerMap, createFeatureSelector, MetaReducer } from '@ngrx/stor
 import { environment as env } from '@env/environment';
 import { Language } from '@app/shared/enums/language';
 import { debugReducer, initStateFromLocalStorage } from '@app/core/meta-reducers/init-state-storage.reducer';
-import { routerReducer, RouterReducerState } from '@ngrx/router-store';
+import { routerReducer, RouterReducerState, SerializedRouterStateSnapshot } from '@ngrx/router-store';
 import { languageReducer } from './language/store';
-import { RouterStateUrl } from './router/router-serializer';
 
 export interface AppState {
   language: Language;
-  router: RouterReducerState<RouterStateUrl>;
+  router: RouterReducerState<SerializedRouterStateSnapshot>;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -24,6 +23,6 @@ if (!env.production) {
 
 export const selectLanguageState = createFeatureSelector<Language>('language');
 
-export const selectRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
+export const selectRouterState = createFeatureSelector<RouterReducerState<SerializedRouterStateSnapshot>>('router');
 
 export const APP_PREFIX = 'test-APP';

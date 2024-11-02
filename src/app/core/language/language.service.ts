@@ -34,10 +34,7 @@ export class LanguageService {
   );
 
   loadPartials(partials: string[] = []): Promise<boolean> {
-    if (!partials.length) {
-      return Promise.resolve(true);
-    }
-
+    if (!partials.length) return Promise.resolve(true);
     return lastValueFrom(
       forkJoin(partials.map(partial => this.fetchPartial(partial))).pipe(
         map(() => true),
@@ -47,13 +44,9 @@ export class LanguageService {
   }
 
   private fetchPartial<T>(partial: string, lang: string = this.translate.currentLang): Observable<T> {
-    if (this.downloadedPartials.has(partial)) {
-      return of(null);
-    }
-
+    if (this.downloadedPartials.has(partial)) return of(null);
     this.downloadedPartials.add(partial);
     const buildTimestamp = new Date(build.timestamp).getTime();
-
     return this.http.get<any>(`assets/i18Local/${lang}/${partial}.json?v=${buildTimestamp}`).pipe(
       tap(response => {
         const translations = {
