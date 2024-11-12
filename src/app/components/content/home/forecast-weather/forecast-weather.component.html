@@ -1,0 +1,35 @@
+<div class="forecast-weather">
+  <h2>5-Day Forecast</h2>
+
+  <div
+    #forecastTiles
+    class="forecast-tiles"
+    (mousedown)="onMouseDown($event)"
+    (mouseleave)="onMouseLeave()"
+    (mouseup)="onMouseUp()"
+    (mousemove)="onMouseMove($event)"
+  >
+    <div *ngFor="let entry of forecast" class="forecast-tile">
+      <h3>{{ entry.dt * 1000 | date: 'EEE, h a' }}</h3>
+      <p>{{ entry.weather?.[0]?.description || 'No description' }}</p>
+      <img [src]="'https://openweathermap.org/img/wn/' + entry.weather?.[0]?.icon + '.png'" [alt]="entry.weather?.[0]?.description || ''" />
+      <p class="temperature">{{ entry.main?.temp | number: '1.0-0' }}°C</p>
+      <p>Feels like: {{ entry.main?.feels_like | number: '1.0-0' }}°C</p>
+      <p>Wind: {{ entry.wind?.speed }} m/s</p>
+      <p>Humidity: {{ entry.main?.humidity }}%</p>
+    </div>
+  </div>
+</div>
+
+<div class="temperature-chart">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [yaxis]="chartOptions.yaxis"
+    [markers]="chartOptions.markers"
+    [fill]="chartOptions.fill"
+    [tooltip]="chartOptions.tooltip"
+    height="300"
+  ></apx-chart>
+</div>

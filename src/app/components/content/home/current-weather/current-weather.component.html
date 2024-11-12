@@ -1,0 +1,23 @@
+<div class="current-weather">
+  <div class="column first-column">
+    <h2>{{ weatherData?.name ?? '' }}, {{ weatherData?.sys?.country ?? '' }}</h2>
+    <span>{{ date }}</span>
+  </div>
+
+  <div class="column second-column">
+    <div class="icon-column">
+      <img [src]="weatherIconUrl" alt="weatherDescription" />
+    </div>
+    <div class="temp-column">
+      <p class="temperature">{{ temperature }}&#176;</p>
+      <p class="desc">{{ weatherDescription }}</p>
+    </div>
+  </div>
+
+  <div class="column third-column">
+    <div *ngFor="let detail of details; trackByIndex" class="weather-detail">
+      <p class="detail-value">{{ detail?.value }}</p>
+      <p class="detail-label">{{ detail?.label }}</p>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { BtnControlsComponent } from './components/btn-controls/btn-controls.com
 import { ButtonModule } from '../button/button.module';
 import { MapLegendComponent } from './components/map-legend/map-legend.component';
 import { MapPopupComponent } from './components/maps-popup/maps-popup.component';
+import { MapSearchComponent } from './components/map-search/map-search.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MapPopupComponent } from './components/maps-popup/maps-popup.component'
     MapMousePositionComponent,
     MapLegendComponent,
     MapPopupComponent,
+    MapSearchComponent,
   ],
   imports: [SharedModule, ButtonModule, FormsModule],
   providers: [DecimalPipe, { provide: OverlayContainer, useClass: FullscreenOverlayContainer }],

@@ -1,0 +1,22 @@
+<div class="map-search">
+  <div class="input-container">
+    <input
+      type="text"
+      [ngModel]="query"
+      (ngModelChange)="handleInputChange($event)"
+      aria-label="dsfdsf"
+      placeholder="Search for a city..."
+    />
+    <app-button class="button-close" [isRound]="true" tooltipTitle="mapData.buttons.close" (btnClick)="handleClearInput()">
+      <i nz-icon nzType="close"></i>
+    </app-button>
+  </div>
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <ul *ngIf="suggestions?.length" class="suggestions-list scroll">
+    <li *ngFor="let suggestion of suggestions; index as i; trackByIndex" (click)="handleSelectSuggestion(suggestion)">
+      {{ suggestion.displayName }}
+    </li>
+  </ul>
+</div>

@@ -12,6 +12,7 @@ import { easeOut } from 'ol/easing';
 import { MapConsts, ViewOptions } from './map.constants';
 import { MapService } from './map.service';
 import { TileLayerBackground } from './components/btn-controls/btn-controls.config';
+import { ISearchData } from './components/map-search/map-search.models';
 
 @UntilDestroy()
 @Component({
@@ -22,6 +23,8 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() height = '50vh';
 
   @Output() mapReady = new EventEmitter<Map>();
+
+  @Output() searchTerm = new EventEmitter<ISearchData>(null);
 
   mapView!: Map;
 
@@ -67,7 +70,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   subscribeToMapService(): void {
-    const { selectedTileLayerBackground$, mapHomePosition$, selectedLayerForLegend$ } = this.mapService;
+    const { selectedTileLayerBackground$, mapHomePosition$, selectedLayerForLegend$, searchData$ } = this.mapService;
 
     mapHomePosition$
       .pipe(
@@ -88,6 +91,15 @@ export class MapComponent implements OnInit, OnDestroy {
         untilDestroyed(this),
         tap(name => {
           this.selectedLayerForLegend = name;
+        })
+      )
+      .subscribe();
+
+    searchData$
+      .pipe(
+        untilDestroyed(this),
+        tap(data => {
+          this.searchTerm.emit(data);
         })
       )
       .subscribe();

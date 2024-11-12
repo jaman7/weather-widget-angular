@@ -1,0 +1,66 @@
+.forecast-weather {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  background: var(--color-blue);
+
+  h2 {
+    color: var(--color-white);
+
+    @extend %textshadownocolor;
+  }
+}
+
+.forecast-tiles {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  @extend %scrol-h;
+}
+
+.forecast-tile {
+  flex: 1 0 120px;
+  text-align: center;
+  padding: 0.3rem;
+  background: rgb(255 255 255 / 80%);
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  color: var(--color-blue);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 30%);
+  transition: transform 0.2s ease;
+  scroll-snap-align: start;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  & h3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  & p {
+    font-size: 14px;
+    margin-bottom: 0.125rem;
+  }
+
+  & .temperature {
+    font-size: 18px;
+  }
+}
+
+.temperature-chart {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: var(--color-white);
+  width: 100%;
+  overflow-x: hidden;
+}

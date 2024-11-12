@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ISearchData } from './components/map-search/map-search.models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,8 @@ export class MapService {
   mapHomePosition$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   selectedLayerForLegend$: BehaviorSubject<string> = new BehaviorSubject('precipitation');
+
+  searchData$: BehaviorSubject<ISearchData> = new BehaviorSubject(null);
 
   updateTileLayer(layerId: number): void {
     this.selectedTileLayerBackground$.next(layerId);

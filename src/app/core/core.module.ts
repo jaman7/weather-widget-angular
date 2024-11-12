@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { APP_INITIALIZER, Injector, NgModule, Optional, SkipSelf } from '@angular/core';
+import { Injector, NgModule, Optional, SkipSelf } from '@angular/core';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { metaReducers, reducers } from './core.state';
 import { LanguageEffects } from './language/store';
@@ -24,7 +24,6 @@ export function initializeLanguageService(languageService: LanguageService) {
     languageService.init();
   };
 }
-
 @NgModule({
   imports: [
     CommonModule,
@@ -45,15 +44,7 @@ export function initializeLanguageService(languageService: LanguageService) {
     }),
   ],
   declarations: [],
-  providers: [
-    LanguageService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeLanguageService,
-      deps: [LanguageService],
-      multi: true,
-    },
-  ],
+  providers: [LanguageService],
   exports: [TranslateModule, HttpClientModule],
 })
 export class CoreModule {

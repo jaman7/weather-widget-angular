@@ -1,5 +1,5 @@
 import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
-import { toCamelCase } from '@app/shared/utils/string-utils';
+import { toCamelCase } from '@app/shared/utils/utils';
 import { APP_PREFIX, AppState } from '../core.state';
 
 export function getStateKeys(storageKey: string): string[] {
