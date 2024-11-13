@@ -42,6 +42,6 @@ export class HomeComponent {
   }
 
   setSearchTerm(data: ISearchData): void {
-    this.fetchWeatherData(data);
+    if (data) this.fetchWeatherData(data);
   }
 }

@@ -7,6 +7,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 @Component({
   selector: 'app-scaleline',
   template: ``,
+  styleUrl: './map-scaleline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapScalelineComponent implements OnInit {

@@ -12,6 +12,7 @@ const { MOUSE_POSITION_CONTROL } = MapSourceClass;
 @Component({
   selector: 'app-mouse-position',
   template: ``,
+  styleUrl: './map-mouse-position.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapMousePositionComponent implements AfterViewInit {

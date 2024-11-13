@@ -9,12 +9,20 @@
     "node": true,
     "es2020": true
   },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "./tsconfig.eslint.json"
+    ]
+  },
   "plugins": [
     "@typescript-eslint"
   ],
   "extends": [
     "plugin:@angular-eslint/recommended",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
   ],
   "rules": {
     "@angular-eslint/directive-selector": [

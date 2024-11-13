@@ -52,7 +52,9 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": []
+              "includePaths": [
+                "src/assets/scss"
+              ]
             },
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -69,7 +71,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
+                  "maximumWarning": "4kB",
                   "maximumError": "4kB"
                 }
               ],

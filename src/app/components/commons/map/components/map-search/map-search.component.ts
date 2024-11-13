@@ -16,6 +16,7 @@ import { MapService } from '../../map.service';
 @Component({
   selector: 'app-map-search',
   templateUrl: './map-search.component.html',
+  styleUrl: './map-search.component.scss',
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
   @Input() mapView!: Map;

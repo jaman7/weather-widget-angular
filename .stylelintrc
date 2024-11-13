@@ -20,6 +20,14 @@
         "ignore": "local"
       }
     ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
+      }
+    ],
     "no-descending-specificity": null,
     "selector-class-pattern": null,
     "scss/no-global-function-names": null,

@@ -15,6 +15,7 @@ const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 @Component({
   selector: 'app-btn-controls',
   templateUrl: './btn-controls.component.html',
+  styleUrl: './btn-controls.component.scss',
   animations: [ExpandCollapseHorizontal],
 })
 export class BtnControlsComponent implements OnInit, OnDestroy {

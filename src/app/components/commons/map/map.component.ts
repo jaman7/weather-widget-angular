@@ -18,6 +18,7 @@ import { ISearchData } from './components/map-search/map-search.models';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
+  styleUrl: './map.component.scss',
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() height = '50vh';

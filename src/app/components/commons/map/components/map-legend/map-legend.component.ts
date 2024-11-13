@@ -5,6 +5,7 @@ import { ILegend } from './map-legend.models';
 @Component({
   selector: 'app-map-legend',
   templateUrl: './map-legend.component.html',
+  styleUrl: './map-legend.component.scss',
 })
 export class MapLegendComponent implements OnChanges {
   @Input() legend: string;
