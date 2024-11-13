@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { BehaviorSubject, of, Observable } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import Map from 'ol/Map';
 import Overlay from 'ol/Overlay';
-import { of, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { toLonLat } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -12,6 +12,15 @@ import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { WeatherPopupService } from './maps-popup.service';
+
+export interface IDataDisplay {
+  label?: string;
+  value?: string | number | null;
+}
+
+export interface IWeatherData {
+  [name: string]: any;
+}
 
 @UntilDestroy()
 @Component({
@@ -24,15 +33,37 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
 
   @Input() mapView: Map;
 
-  weatherData$: Observable<any> = of(null);
-
   private overlay: Overlay;
 
   private markerLayer: VectorLayer<VectorSource>;
 
   private currentMarker: Feature;
 
+  private coordinatesSubject = new BehaviorSubject<number[]>([]);
+
+  details$: Observable<IDataDisplay[]> = this.coordinatesSubject.pipe(
+    debounceTime(300),
+    distinctUntilChanged((prev, curr) => prev[0] === curr[0] && prev[1] === curr[1]),
+    switchMap(([lon, lat]) =>
+      this.getWeatherData(lat, lon).pipe(
+        map(data => (data ? this.mapToDetails(data) : [])),
+        catchError(() => of([{ label: 'Data unavailable', value: '' }]))
+      )
+    ),
+    untilDestroyed(this)
+  );
+
   ngAfterViewInit(): void {
+    this.overlay = new Overlay({
+      element: this.popupEl.nativeElement,
+      offset: [0, -13],
+    });
+    this.markerLayer = new VectorLayer({
+      source: new VectorSource(),
+    });
+
+    this.mapView.addOverlay(this.overlay);
+    this.mapView.addLayer(this.markerLayer);
     this.setupPopup();
   }
 
@@ -42,46 +73,31 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
   }
 
   setupPopup(): void {
-    this.overlay = new Overlay({
-      element: this.popupEl.nativeElement,
-      offset: [0, -13],
-    });
-    this.mapView.addOverlay(this.overlay);
-
-    this.markerLayer = new VectorLayer({
-      source: new VectorSource(),
-    });
-    this.mapView.addLayer(this.markerLayer);
-
     this.mapView.on('singleclick', event => {
       const { coordinate } = event;
       const [lon, lat] = toLonLat(coordinate);
-
-      this.weatherData$ = this.getWeatherData(lat, lon).pipe(
-        untilDestroyed(this),
-        map(data => ({
-          id: data.id,
-          wind: data.wind.speed,
-          temp: data.main.temp,
-          clouds: data.clouds.all,
-          pressure: data.main.pressure,
-          sys: data.sys,
-        })),
-        catchError((): any => of(false))
-      );
-
-      this.addMarker(coordinate);
+      this.coordinatesSubject.next([lon, lat]);
+      this.addOrUpdateMarker(coordinate);
       this.overlay.setPosition(coordinate);
-
       const popupRect = this.popupEl.nativeElement.getBoundingClientRect();
-      const offsetX = -popupRect.width / 2;
-      const offsetY = popupRect.height + 30;
-      this.overlay.setOffset([offsetX, -offsetY]);
+      this.overlay.setOffset([-popupRect.width / 2, -popupRect.height - 30]);
     });
   }
 
-  addMarker(coordinate: number[]): void {
+  private mapToDetails(data: IWeatherData): IDataDisplay[] {
+    const { wind, clouds, main } = data || {};
+    return [
+      { label: 'Temperature:', value: `${Math.floor((main?.temp as number) ?? 0)}°C` },
+      { label: 'Wind:', value: `${Math.floor((wind?.speed as number) ?? 0)}m/s` },
+      { label: 'Cloud cover:', value: `${(clouds?.all as number) ?? 0}%` },
+      { label: 'Pressure:', value: `${(main?.pressure as number) ?? 0}hPa` },
+    ];
+  }
+
+  private addOrUpdateMarker(coordinate: number[]): void {
     if (this.currentMarker) {
+      const currentCoord = (this.currentMarker.getGeometry() as Point).getCoordinates();
+      if (currentCoord[0] === coordinate[0] && currentCoord[1] === coordinate[1]) return;
       this.markerLayer.getSource().removeFeature(this.currentMarker);
     }
 
@@ -105,7 +121,6 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
 
   closePopup(): void {
     this.overlay.setPosition(undefined);
-
     if (this.currentMarker) {
       this.markerLayer.getSource().removeFeature(this.currentMarker);
       this.currentMarker = null;
