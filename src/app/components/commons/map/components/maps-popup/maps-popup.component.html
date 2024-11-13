@@ -3,7 +3,7 @@
     <i nz-icon nzType="close"></i>
   </app-button>
   <div *ngIf="details$ | async as detailsList">
-    <p *ngFor="let item of detailsList" class="text orange-text m-0">
+    <p *ngFor="let item of detailsList; trackByIndex" class="text orange-text m-0">
       {{ item.label }} <span>{{ item.value }}</span>
     </p>
   </div>
