@@ -32,6 +32,9 @@
       "@env/*": [
         "environments/*"
       ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
       "@scss/*": [
         "assets/scss/*"
       ]
@@ -43,5 +46,10 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "fullTemplateTypeCheck": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "storybook-static"
+  ]
 }

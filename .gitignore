@@ -56,3 +56,5 @@ package-lock.json
 
 # Husky
 .husky/_
+
+*storybook.log

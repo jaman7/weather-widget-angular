@@ -12,7 +12,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": [
-      "./tsconfig.eslint.json"
+      "./tsconfig.spec.json"
     ]
   },
   "plugins": [
@@ -21,6 +21,7 @@
   "extends": [
     "plugin:@angular-eslint/recommended",
     "eslint:recommended",
+    "plugin:storybook/recommended",
     "plugin:storybook/recommended",
     "plugin:storybook/recommended"
   ],
@@ -210,39 +211,16 @@
         "project": "./src/tsconfig.spec.json"
       },
       "extends": [
-        "plugin:jasmine/recommended"
+        "plugin:jest/recommended"
       ],
       "plugins": [
-        "jasmine"
+        "jest"
       ],
       "env": {
-        "jasmine": true
+        "jest": true
       },
       "rules": {
         "@typescript-eslint/no-unused-vars": "off"
-      }
-    },
-    {
-      "files": [
-        "e2e/**/*.e2e-spec.ts",
-        "e2e/**/*.po.ts"
-      ],
-      "parserOptions": {
-        "project": "./e2e/tsconfig.json"
-      },
-      "extends": [
-        "plugin:protractor/recommended"
-      ],
-      "plugins": [
-        "protractor"
-      ],
-      "rules": {
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "devDependencies": true
-          }
-        ]
       }
     }
   ]

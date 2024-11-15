@@ -12,7 +12,7 @@ export class LanguageEffects {
     () =>
       this.actions$.pipe(
         ofType(LanguageActionTypes.CHANGE_LANGUAGE),
-        map((action) => {
+        map(action => {
           localStorage.setItem(`${APP_PREFIX}${'LANGUAGE'}`, JSON.stringify(action.payload));
         })
       ),

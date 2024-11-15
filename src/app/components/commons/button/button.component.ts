@@ -6,6 +6,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
+  @Input() id: string | number;
+
   @Input() name = '';
 
   @Input() icon = '';
@@ -28,6 +30,10 @@ export class ButtonComponent {
 
   onClickButton(event: MouseEvent, id?: string): void {
     this.btnClick.emit(event);
-    this.btnClickId.emit(id);
+    this.btnClickId.emit(id ?? this.id ?? null);
+  }
+
+  get ariaLabel(): string {
+    return this.name || 'button';
   }
 }

@@ -8,6 +8,11 @@ import {
   AccountBookFill,
   AlertOutline,
   AlertFill,
+  HomeOutline,
+  ZoomInOutline,
+  ZoomOutOutline,
+  PlusCircleOutline,
+  MinusCircleOutline,
 } from '@ant-design/icons-angular/icons';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
@@ -15,7 +20,19 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 
-const icons: IconDefinition[] = [StepBackwardOutline, CaretLeftOutline, SettingOutline, AccountBookFill, AlertOutline, AlertFill];
+export const icons: IconDefinition[] = [
+  StepBackwardOutline,
+  CaretLeftOutline,
+  SettingOutline,
+  AccountBookFill,
+  AlertOutline,
+  AlertFill,
+  HomeOutline,
+  ZoomInOutline,
+  ZoomOutOutline,
+  PlusCircleOutline,
+  MinusCircleOutline,
+];
 
 @NgModule({
   exports: [NzButtonModule, NzIconModule, NzToolTipModule, NzCheckboxModule, NzRadioModule, ScrollingModule],
