@@ -21,8 +21,6 @@
   "extends": [
     "plugin:@angular-eslint/recommended",
     "eslint:recommended",
-    "plugin:storybook/recommended",
-    "plugin:storybook/recommended",
     "plugin:storybook/recommended"
   ],
   "rules": {
@@ -42,24 +40,73 @@
         "style": "kebab-case"
       }
     ],
-    "class-methods-use-this": "off",
+    "class-methods-use-this": "error",
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import/no-extraneous-dependencies": "off",
+    "import/no-extraneous-dependencies": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
     "no-use-before-define": [
       "error",
       {
-        "functions": false,
+        "functions": true,
         "classes": true,
         "variables": true
       }
     ],
-    "import/no-default-export": "error"
+    "import/no-default-export": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    "lines-between-class-members": [
+      "error",
+      "always"
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": true
+      }
+    ],
+    "@typescript-eslint/unbound-method": [
+      "error",
+      {
+        "ignoreStatic": true
+      }
+    ],
+    "max-classes-per-file": [
+      "error",
+      {
+        "ignoreExpressions": true,
+        "max": 2
+      }
+    ],
+    "@typescript-eslint/init-declarations": "error",
+    "@typescript-eslint/indent": [
+      "error",
+      {
+        "SwitchCase": 1,
+        "ignoredNodes": [
+          "TemplateLiteral *"
+        ],
+        "flatTernaryExpressions": false
+      }
+    ],
+    "no-underscore-dangle": "off",
+    "no-undef": "error",
+    "no-restricted-syntax": "off"
   },
   "overrides": [
     {
@@ -88,83 +135,15 @@
         ]
       },
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ],
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
-        "lines-between-class-members": "off",
-        "class-methods-use-this": "off",
-        "prettier/prettier": "error",
-        "valid-typeof": "off",
-        "no-console": [
-          "error",
-          {
-            "allow": [
-              "warn",
-              "error"
-            ]
-          }
-        ],
-        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
           "error",
           {
             "vars": "all",
             "args": "after-used"
           }
-        ],
-        "prefer-destructuring": [
-          "error",
-          {
-            "object": true,
-            "array": true
-          }
-        ],
-        "@typescript-eslint/unbound-method": [
-          "error",
-          {
-            "ignoreStatic": true
-          }
-        ],
-        "max-classes-per-file": [
-          "error",
-          {
-            "ignoreExpressions": true,
-            "max": 2
-          }
-        ],
-        "init-declarations": "off",
-        "@typescript-eslint/init-declarations": "error",
-        "@typescript-eslint/indent": [
-          "error",
-          2
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-underscore-dangle": "off",
-        "no-use-before-define": [
-          "error",
-          {
-            "functions": true,
-            "classes": true
-          }
-        ],
-        "no-undef": "error",
-        "no-restricted-syntax": "off",
-        "@typescript-eslint/no-empty-function": "warn"
+        ]
       }
     },
     {
@@ -204,8 +183,8 @@
     },
     {
       "files": [
-        "src /**/*.spec.ts",
-        "src /**/*.d.ts"
+        "src/**/*.spec.ts",
+        "src/**/*.d.ts"
       ],
       "parserOptions": {
         "project": "./src/tsconfig.spec.json"

@@ -10,8 +10,6 @@ import { fadeInOut } from '@app/shared/animations/animations';
 export class MainComponent {
   showOutlet = false;
 
-  isLoading = true;
-
   constructor(private router: Router) {}
 
   getActiveRoute(): string {
