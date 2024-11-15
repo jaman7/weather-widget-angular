@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import Map from 'ol/Map';
+import { Map as MapView } from 'ol';
 import Overlay from 'ol/Overlay';
 import { toLonLat } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
@@ -31,7 +31,7 @@ export interface IWeatherData {
 export class MapPopupComponent extends WeatherPopupService implements AfterViewInit, OnDestroy {
   @ViewChild('popup') popupEl: ElementRef;
 
-  @Input() mapView: Map;
+  @Input() mapView: MapView;
 
   private overlay: Overlay;
 

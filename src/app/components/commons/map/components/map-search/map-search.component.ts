@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import Map from 'ol/Map';
+import { Map as MapView } from 'ol';
 import VectorImageLayer from 'ol/layer/VectorImage';
 import { Feature } from 'ol';
 import { fromLonLat } from 'ol/proj';
@@ -19,7 +19,7 @@ import { MapService } from '../../map.service';
   styleUrl: './map-search.component.scss',
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
-  @Input() mapView!: Map;
+  @Input() mapView!: MapView;
 
   query: string = '';
 

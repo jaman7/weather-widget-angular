@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
-import { View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import VectorImageLayer from 'ol/layer/VectorImage';
-import Map from 'ol/Map';
+import { Map as MapView, View } from 'ol';
 import { OSM } from 'ol/source';
 import VectorSource from 'ol/source/Vector';
 import { defaults as defaultControls } from 'ol/control';
@@ -23,11 +22,11 @@ import { ISearchData } from './components/map-search/map-search.models';
 export class MapComponent implements OnInit, OnDestroy {
   @Input() height = '50vh';
 
-  @Output() mapReady = new EventEmitter<Map>();
+  @Output() mapReady = new EventEmitter<MapView>();
 
   @Output() searchTerm = new EventEmitter<ISearchData>(null);
 
-  mapView!: Map;
+  mapView!: MapView;
 
   vectorSource = new VectorSource();
 
@@ -61,7 +60,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   initializeMap(): void {
-    this.mapView = new Map({
+    this.mapView = new MapView({
       view: new View({ ...ViewOptions }),
       controls: defaultControls({ attribution: false }),
       layers: [this.tileLayer, this.vectorLayerTop],

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef } from '@angular/core';
-import Map from 'ol/Map';
+import { Map as MapView } from 'ol';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -10,7 +10,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapViewComponent implements OnInit {
-  @Input() mapView: Map;
+  @Input() mapView: MapView;
 
   constructor(private elementRef: ElementRef) {}
 

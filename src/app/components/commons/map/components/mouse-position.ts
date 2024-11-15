@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, ElementRef, AfterViewInit } from '@angular/core';
-import Map from 'ol/Map';
+import { Map as MapView } from 'ol';
 import MousePosition from 'ol/control/MousePosition';
 import { toStringXY } from 'ol/coordinate';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -16,7 +16,7 @@ const { MOUSE_POSITION_CONTROL } = MapSourceClass;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapMousePositionComponent implements AfterViewInit {
-  @Input() mapView: Map;
+  @Input() mapView: MapView;
 
   @Input() positionTemplate?: string;
 

@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import Map from 'ol/Map';
+import { Map as MapView } from 'ol';
 import { easeIn, easeOut } from 'ol/easing';
 import { Observable, Subscription, concatMap, from, interval, of } from 'rxjs';
 import { ExpandCollapseHorizontal } from '@app/shared/animations/animations';
@@ -19,7 +19,7 @@ const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
   animations: [ExpandCollapseHorizontal],
 })
 export class BtnControlsComponent implements OnInit, OnDestroy {
-  @Input() mapView!: Map;
+  @Input() mapView!: MapView;
 
   sidebarRightConfig = sidebarConfig();
 
