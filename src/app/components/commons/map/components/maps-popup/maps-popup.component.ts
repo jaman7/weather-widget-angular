@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Map as MapView } from 'ol';
 import Overlay from 'ol/Overlay';
 import { toLonLat } from 'ol/proj';
@@ -42,6 +42,7 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
   private coordinatesSubject = new BehaviorSubject<number[]>([]);
 
   details$: Observable<IDataDisplay[]> = this.coordinatesSubject.pipe(
+    filter(([lon, lat]) => lon != null && lat != null),
     debounceTime(300),
     distinctUntilChanged((prev, curr) => prev[0] === curr[0] && prev[1] === curr[1]),
     switchMap(([lon, lat]) =>

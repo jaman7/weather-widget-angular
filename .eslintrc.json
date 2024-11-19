@@ -135,8 +135,8 @@
         ]
       },
       "rules": {
-        "import/no-unresolved": "off",
-        "import/prefer-default-export": "off",
+        "import/no-unresolved": "error",
+        "import/prefer-default-export": "error",
         "@typescript-eslint/no-unused-vars": [
           "error",
           {

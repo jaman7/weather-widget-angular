@@ -31,7 +31,7 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
 
   selectedBackgroundLayer = TileLayerBackground.find(layer => layer.checked)?.id || 1;
 
-  actions = {
+  actions: { [name: string]: () => void } = {
     [BTN_ZOOM_IN]: (): void => {
       this.onZoomIn();
     },
@@ -75,7 +75,7 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
   }
 
   onButtonControlAction(id: string): void {
-    if (id in this.actions) this.actions[id]();
+    if (id in this.actions) this.actions?.[id]();
   }
 
   onLayerChange(item: ISidebarConfig | number, type: CheckboxTypes): void {

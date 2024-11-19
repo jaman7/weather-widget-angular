@@ -8,32 +8,25 @@ export interface IParams {
 
 export class HttpOptions {
   headers?: HttpHeaders | { [header: string]: string | string[] };
-
   observe?: 'body';
-
   params?: IParams;
-
   reportProgress?: boolean;
-
   responseType?: 'json';
-
   withCredentials?: boolean;
+  forceRefresh?: boolean;
+  retries?: number;
+  useFullUrl?: boolean;
+  timeout?: number;
 }
 
 export class HttpRequestOptions {
   body?: any;
-
   headers?: HttpHeaders | { [header: string]: string | string[] };
-
   params?: {
     [param: string]: string | string[];
   };
-
   observe?: HttpObserveType;
-
   reportProgress?: boolean;
-
   responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-
   withCredentials?: boolean;
 }

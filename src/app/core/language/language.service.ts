@@ -4,18 +4,15 @@ import { catchError, distinctUntilChanged, filter, map, tap } from 'rxjs/operato
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import build from '@env/build.json';
+import buildEnvironment from '@env/build-environment';
 import { AppState, selectLanguageState } from '../core.state';
-
-const DEFAULT_LANGUAGE = 'en';
+import { DEFAULT_LANGUAGE, INITIAL_PARTIALS } from './language.config';
 
 @Injectable()
 export class LanguageService {
   private translations: { [key: string]: any } = {};
-
   private downloadedPartials = new Set<string>();
-
-  private initialPartials = new Set<string>(['menu', 'map-data']);
+  private initialPartials = new Set<string>(INITIAL_PARTIALS);
 
   constructor(
     private translate: TranslateService,
@@ -29,24 +26,24 @@ export class LanguageService {
     filter(Boolean),
     tap(language => {
       this.translate.use(language || DEFAULT_LANGUAGE);
-      this.loadPartials([...this.initialPartials]);
+      this.loadTranslations([...this.initialPartials]);
     })
   );
 
-  loadPartials(partials: string[] = []): Promise<boolean> {
+  loadTranslations(partials: string[] = []): Promise<boolean> {
     if (!partials.length) return Promise.resolve(true);
     return lastValueFrom(
-      forkJoin(partials.map(partial => this.fetchPartial(partial))).pipe(
+      forkJoin(partials.map(partial => this.fetchTranslation(partial))).pipe(
         map(() => true),
         catchError(() => of(true))
       )
     );
   }
 
-  private fetchPartial<T>(partial: string, lang: string = this.translate.currentLang): Observable<T> {
+  private fetchTranslation<T>(partial: string, lang: string = this.translate.currentLang): Observable<T> {
     if (this.downloadedPartials.has(partial)) return of(null);
     this.downloadedPartials.add(partial);
-    const buildTimestamp = new Date(build.timestamp).getTime();
+    const buildTimestamp = new Date(buildEnvironment.buildTimestamp).getTime();
     return this.http.get<any>(`assets/i18Local/${lang}/${partial}.json?v=${buildTimestamp}`).pipe(
       tap(response => {
         const translations = {

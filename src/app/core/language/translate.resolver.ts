@@ -16,6 +16,6 @@ export class TranslateResolver {
 
   resolve(route: ActivatedRouteSnapshot): Promise<boolean> {
     const i18nPartials = this.extractTranslatePartials(route);
-    return this.languageService.loadPartials(i18nPartials);
+    return this.languageService.loadTranslations(i18nPartials);
   }
 }

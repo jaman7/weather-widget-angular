@@ -8,15 +8,18 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LanguageEffects } from './language/store';
-import * as build from '../../environments/build.json';
-import { MissingTranslation } from './language/missing-translation.handler';
+import buildEnvironment from '@env/build-environment';
 import { LanguageService } from './language/language.service';
 import { metaReducers, reducers } from './core.state';
 import { HttpClientModule } from './http/httpclient.module';
+import { MissingTranslation } from './language/language-missing-translation.handler';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  const buildJSON = build;
-  return new TranslateHttpLoader(http, 'assets/i18Local/', `.json?v=${new Date(buildJSON.timestamp).getTime()}`);
+  return new TranslateHttpLoader(
+    http,
+    'assets/i18Local/',
+    `.json?v=${buildEnvironment?.buildTimestamp ? new Date(buildEnvironment.buildTimestamp ?? null).getTime() : ''}`
+  );
 }
 
 export function initializeLanguageService(languageService: LanguageService) {
