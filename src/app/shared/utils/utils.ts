@@ -11,4 +11,9 @@ export function safelyParseJSON(jsonString: string): any {
   }
 }
 
-export const sunsetSunrise = (utc: number): string => new Date(utc * 1000).toLocaleTimeString().slice(0, 5);
+export const sunsetSunrise = (utc: number): string => {
+  const date = new Date(utc * 1000); // Convert seconds to milliseconds
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+};

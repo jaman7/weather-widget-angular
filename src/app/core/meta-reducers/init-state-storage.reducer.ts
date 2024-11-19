@@ -1,7 +1,7 @@
 import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
 import { safelyParseJSON, toCamelCase } from '@app/shared/utils/utils';
 import { APP_PREFIX, AppState } from '../core.state';
-import { AbstractStorageService, SessionStorageService } from '@app/shared/utils/abstract-storage.service';
+import { AbstractStorageService, SessionStorageService } from '../session-storage/session-storage.service';
 
 const storageService: AbstractStorageService = new SessionStorageService();
 

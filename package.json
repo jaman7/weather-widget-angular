@@ -30,28 +30,6 @@
       "git add"
     ]
   },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setup-jest.ts"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "html",
-      "js",
-      "json"
-    ],
-    "transform": {
-      "^.+\\.(ts|html)$": "jest-preset-angular"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!.*\\.mjs$)"
-    ]
-  },
   "dependencies": {
     "@angular/animations": "^18.2.3",
     "@angular/cdk": "^18.2.3",
@@ -88,6 +66,7 @@
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^18.0.0",
     "@angular-devkit/build-angular": "^18.2.3",
     "@angular-eslint/eslint-plugin": "^18.3.1",
     "@angular-eslint/eslint-plugin-template": "^18.3.1",
