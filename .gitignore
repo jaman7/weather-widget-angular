@@ -46,6 +46,7 @@ yarn-error.log
 testem.log
 /typings
 .angulardoc.json
+*.zip
 
 # System Files
 .DS_Store
