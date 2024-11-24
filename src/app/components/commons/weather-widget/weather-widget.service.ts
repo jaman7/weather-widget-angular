@@ -9,7 +9,6 @@ import { IWeatherData } from './weather-widget.model';
 })
 export abstract class WeatherWidgetService extends HttpService {
   API_URL = 'https://api.openweathermap.org/data/2.5/weather';
-
   private API_KEY = 'ae98d58d517252f2065829367d320dbb';
 
   getWeather(city: string): Observable<IWeatherData> {
@@ -18,7 +17,6 @@ export abstract class WeatherWidgetService extends HttpService {
       appid: this.API_KEY,
       units: 'metric',
     };
-
     return this.get<IWeatherData>(this.API_URL, { params }, true).pipe(
       map((data: any) => ({
         id: data.id,

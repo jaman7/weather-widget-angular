@@ -2,10 +2,8 @@
   [disabled]="disabled"
   [type]="type"
   (click)="onClickButton($event)"
-  [class]="className"
-  [class.round]="isRound"
   class="button-component"
-  [ngClass]="customClass ?? ''"
+  [ngClass]="combinedClasses"
   nz-tooltip
   nzTooltipPlacement="top"
   nzTooltipOverlayClassName="tooltip-btn-top"
@@ -15,6 +13,5 @@
 >
   {{ name ? (name | translate) : '' }}
   <i *ngIf="icon" nz-icon [nzType]="icon"></i>
-
   <ng-content></ng-content>
 </button>

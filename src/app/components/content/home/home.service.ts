@@ -14,7 +14,6 @@ export class HomeService extends HttpService {
       appid: API_KEY,
       units: 'metric',
     };
-
     return this.get(`${API_URL}/weather`, { params }, true);
   }
 
@@ -25,7 +24,6 @@ export class HomeService extends HttpService {
       appid: API_KEY,
       units: 'metric',
     };
-
     return this.get(`${API_URL}/forecast`, { params }, true);
   }
 }

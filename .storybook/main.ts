@@ -18,7 +18,6 @@ const config: StorybookConfig = {
     builder: 'webpack5',
   },
   webpackFinal: async config => {
-    // Ensure config.resolve exists
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,

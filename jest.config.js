@@ -1,6 +1,6 @@
 globalThis.ngJest = {
   skipNgcc: true,
-  tsconfig: 'tsconfig.spec.json', // this is the project root tsconfig
+  tsconfig: 'tsconfig.spec.json',
 };
 
 /** @type {import('@jest/types').Config.InitialOptions} */
@@ -16,8 +16,8 @@ module.exports = {
   moduleNameMapper: {
     '^@app/(.*)$': '<rootDir>/src/app/$1',
     '^@env/(.*)$': '<rootDir>/src/environments/$1',
-    '^.+\\.(ts|html)$': 'jest-preset-angular', // Use jest-preset-angular for TypeScript and templates
-    '\\.(scss|css|sass)$': 'identity-obj-proxy', // Mock styles
+    '^.+\\.(ts|html)$': 'jest-preset-angular',
+    '\\.(scss|css|sass)$': 'identity-obj-proxy',
   },
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
   fakeTimers: {

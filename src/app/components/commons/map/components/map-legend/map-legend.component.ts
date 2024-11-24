@@ -9,13 +9,10 @@ import { ILegend } from './map-legend.models';
 })
 export class MapLegendComponent implements OnChanges {
   @Input() legend: string;
-
   scaleDetails: { [name: string]: ILegend } = {};
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.legend) {
-      this.scaleDetails = this.getScaleDetails(this.legend);
-    }
+    if (changes.legend) this.scaleDetails = this.getScaleDetails(this.legend);
   }
 
   getScaleDetails(layerName: string): any {

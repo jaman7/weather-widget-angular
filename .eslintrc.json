@@ -143,6 +143,19 @@
             "vars": "all",
             "args": "after-used"
           }
+        ],
+        "padding-line-between-statements": [
+          "error",
+          {
+            "blankLine": "never",
+            "prev": "directive",
+            "next": "expression"
+          },
+          {
+            "blankLine": "never",
+            "prev": "expression",
+            "next": "expression"
+          }
         ]
       }
     },

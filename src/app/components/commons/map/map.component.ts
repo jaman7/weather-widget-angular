@@ -10,7 +10,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { easeOut } from 'ol/easing';
 import { MapConsts, ViewOptions } from './map.constants';
 import { MapService } from './map.service';
-import { TileLayerBackground } from './components/btn-controls/btn-controls.config';
+import { TileLayerBackground } from './components/sidebar-controls/sidebar-controls.config';
 import { ISearchData } from './components/map-search/map-search.models';
 
 @UntilDestroy()
@@ -21,21 +21,14 @@ import { ISearchData } from './components/map-search/map-search.models';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() height = '50vh';
-
   @Output() mapReady = new EventEmitter<MapView>();
-
   @Output() searchTerm = new EventEmitter<ISearchData>(null);
-
   mapView!: MapView;
-
   vectorSource = new VectorSource();
-
   selectedLayerForLegend = '';
-
   tileLayer = new TileLayer({
     source: new OSM(),
   });
-
   vectorLayerTop = new VectorImageLayer({
     source: this.vectorSource,
   });
@@ -89,26 +82,20 @@ export class MapComponent implements OnInit, OnDestroy {
     selectedLayerForLegend$
       .pipe(
         untilDestroyed(this),
-        tap(name => {
-          this.selectedLayerForLegend = name;
-        })
+        tap(name => (this.selectedLayerForLegend = name))
       )
       .subscribe();
 
     searchData$
       .pipe(
         untilDestroyed(this),
-        tap(data => {
-          this.searchTerm.emit(data);
-        })
+        tap(data => this.searchTerm.emit(data))
       )
       .subscribe();
   }
 
   updateTileLayer(index: number): void {
-    if (this.tileLayer && index >= 0) {
-      this.tileLayer.setSource(TileLayerBackground[index].source);
-    }
+    if (this.tileLayer && index >= 0) this.tileLayer.setSource(TileLayerBackground[index].source);
   }
 
   resetMapPosition(): void {

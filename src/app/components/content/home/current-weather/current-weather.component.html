@@ -3,7 +3,6 @@
     <h2>{{ weatherData?.name ?? '' }}, {{ weatherData?.sys?.country ?? '' }}</h2>
     <span>{{ date }}</span>
   </div>
-
   <div class="column second-column">
     <div class="icon-column">
       <img [src]="weatherIconUrl" alt="weatherDescription" />
@@ -13,7 +12,6 @@
       <p class="desc">{{ weatherDescription }}</p>
     </div>
   </div>
-
   <div class="column third-column">
     <div *ngFor="let detail of details; trackByIndex" class="weather-detail">
       <p class="detail-value">{{ detail?.value }}</p>

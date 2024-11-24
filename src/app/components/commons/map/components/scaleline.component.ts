@@ -12,7 +12,6 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 })
 export class MapScalelineComponent implements OnInit {
   @Input() mapView: Map;
-
   control?: ScaleLine;
 
   constructor(private elementRef: ElementRef) {}

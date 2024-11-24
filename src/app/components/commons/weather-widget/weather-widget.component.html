@@ -13,7 +13,6 @@
       </svg>
       <span class="countdown">{{ refreshCountdown$ | async }}s</span>
     </div>
-
     <div class="progress">
       <span class="title">Next to random city</span>
       <svg viewBox="0 0 36 36" class="circular-chart">
@@ -31,7 +30,6 @@
   <div class="widget" *ngFor="let city of selectedCities$ | async; trackByIndex" (click)="openCity(city.id)">
     <h3 class="city">{{ city.city }}</h3>
     <div class="flex-center"><img class="img-fluid" [src]="city.icon" alt="city.description" /></div>
-
     <span class="temperature">{{ city.temp.toFixed(1) }}°C</span>
     <span class="description">{{ city.description }}</span>
   </div>

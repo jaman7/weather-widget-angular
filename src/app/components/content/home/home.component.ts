@@ -12,7 +12,6 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent {
   cities = ['Lodz', 'Warszawa', 'Berlin', 'New York', 'London'];
-
   weatherData: IWeatherData = {};
 
   constructor(public homeService: HomeService) {}
@@ -25,7 +24,6 @@ export class HomeComponent {
           if (weather && forecast?.list?.length) {
             const sunset = sunsetSunrise(weather?.sys?.sunset || 0);
             const sunrise = sunsetSunrise(weather?.sys?.sunrise || 0);
-
             this.weatherData = {
               ...weather,
               sunrise,

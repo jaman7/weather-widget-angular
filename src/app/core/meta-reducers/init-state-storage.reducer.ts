@@ -19,13 +19,10 @@ function updateNestedState(state: any, keys: string[], value: any): any {
 export function loadInitialState(): Record<string, any> {
   return Object.keys(sessionStorage).reduce((state: any, storageKey: string) => {
     if (!storageKey.startsWith(APP_PREFIX)) return state;
-
     const storedItem = storageService.getItem(storageKey);
     if (!storedItem) return state;
-
     const parsedItem = safelyParseJSON(storedItem);
     if (parsedItem === null) return state;
-
     const stateKeys = getStateKeys(storageKey);
     return updateNestedState(state, stateKeys, parsedItem);
   }, {});
@@ -34,12 +31,10 @@ export function loadInitialState(): Record<string, any> {
 export function initStateFromLocalStorage(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
   return (state, action) => {
     const newState = reducer(state, action);
-
     if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
       const loadedState = loadInitialState();
       return { ...newState, ...loadedState };
     }
-
     return newState;
   };
 }

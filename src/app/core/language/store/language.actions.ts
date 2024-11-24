@@ -7,7 +7,6 @@ export enum LanguageActionTypes {
 
 export class ActionLanguageChange implements Action {
   readonly type = LanguageActionTypes.CHANGE_LANGUAGE;
-
   constructor(public payload: LanguageType) {}
 }
 

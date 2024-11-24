@@ -3,16 +3,12 @@
     <h1><span class="orange-text">OpenWeather</span></h1>
   </div>
 </div>
-
 <div class="section px-0">
   <div class="grid-container grid-1-1 gap-0">
     <div class="weather-map-img"></div>
     <app-weather-widget [cities]="cities" class="p-3" />
   </div>
 </div>
-
 <app-map (searchTerm)="setSearchTerm($event)" />
-
 <app-current-weather *ngIf="weatherData?.city" [weatherData]="weatherData ?? null" />
-
 <app-forecast-weather *ngIf="weatherData?.forecast?.length" [forecast]="weatherData?.forecast ?? []" />

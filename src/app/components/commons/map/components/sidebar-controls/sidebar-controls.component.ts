@@ -6,29 +6,24 @@ import { ExpandCollapseHorizontal } from '@app/shared/animations/animations';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
 import { MapService } from '@app/components/commons/map/map.service';
-import { MapsTilleLayers, sidebarConfig, TileLayerBackground } from './btn-controls.config';
-import { CheckboxTypes, ISidebarConfig } from './btn-controls.models';
-import { ButtonsControl } from './btn-controls.enums';
+import { MapsTilleLayers, sidebarConfig, TileLayerBackground } from './sidebar-controls.config';
+import { CheckboxTypes, ISidebarConfig } from './sidebar-controls.models';
+import { ButtonsControl } from './sidebar-controls.enums';
 
 const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 
 @Component({
-  selector: 'app-btn-controls',
-  templateUrl: './btn-controls.component.html',
-  styleUrl: './btn-controls.component.scss',
+  selector: 'app-sidebar-controls',
+  templateUrl: './sidebar-controls.component.html',
+  styleUrl: './sidebar-controls.component.scss',
   animations: [ExpandCollapseHorizontal],
 })
-export class BtnControlsComponent implements OnInit, OnDestroy {
+export class SidebarControlsComponent implements OnInit, OnDestroy {
   @Input() mapView!: MapView;
-
   sidebarRightConfig = sidebarConfig();
-
   collapsedSidebarRight$: Observable<boolean> = of(true);
-
   mapsTilleLayers = MapsTilleLayers;
-
   selectedTileLayer = this.mapsTilleLayers[0];
-
   selectedBackgroundLayer = TileLayerBackground.find(layer => layer.checked)?.id || 1;
 
   actions: { [name: string]: () => void } = {
@@ -49,7 +44,6 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.mapView.addLayer(this.selectedTileLayer.tile);
-
     this.startLayerUpdate();
   }
 
@@ -90,7 +84,6 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
     this.mapsTilleLayers.forEach(layer => {
       if (this.mapView.getLayers().getArray().includes(layer.tile)) this.mapView.removeLayer(layer.tile);
     });
-
     this.mapView.addLayer(selectedLayer.tile);
     this.mapService.updateLegendLayer(selectedLayer.name);
   }
@@ -125,8 +118,6 @@ export class BtnControlsComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event.target'])
   handleOutsideClick(target: HTMLElement): void {
-    if (!target.closest('.map-sidebar')) {
-      this.collapsedSidebarRight$ = of(false);
-    }
+    if (!target.closest('.map-sidebar')) this.collapsedSidebarRight$ = of(false);
   }
 }

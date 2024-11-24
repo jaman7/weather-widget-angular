@@ -7,7 +7,7 @@ import { MapComponent } from './map.component';
 import { MapViewComponent } from './components/map-view.component';
 import { MapScalelineComponent } from './components/scaleline.component';
 import { MapMousePositionComponent } from './components/mouse-position';
-import { BtnControlsComponent } from './components/btn-controls/btn-controls.component';
+import { SidebarControlsComponent } from './components/sidebar-controls/sidebar-controls.component';
 import { ButtonModule } from '../button/button.module';
 import { MapLegendComponent } from './components/map-legend/map-legend.component';
 import { MapPopupComponent } from './components/maps-popup/maps-popup.component';
@@ -16,7 +16,7 @@ import { MapSearchComponent } from './components/map-search/map-search.component
 @NgModule({
   declarations: [
     MapComponent,
-    BtnControlsComponent,
+    SidebarControlsComponent,
     MapViewComponent,
     MapScalelineComponent,
     MapMousePositionComponent,

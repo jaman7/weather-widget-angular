@@ -17,9 +17,7 @@ const { MOUSE_POSITION_CONTROL } = MapSourceClass;
 })
 export class MapMousePositionComponent implements AfterViewInit {
   @Input() mapView: MapView;
-
   @Input() positionTemplate?: string;
-
   control?: MousePosition;
 
   constructor(private element: ElementRef) {}

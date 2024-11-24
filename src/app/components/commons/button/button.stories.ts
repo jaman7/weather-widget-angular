@@ -1,6 +1,10 @@
 import { StoryObj, Meta } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { ButtonsControl, MapButtonsIcons, MapButtonsTooltip } from '@app/components/commons/map/components/btn-controls/btn-controls.enums';
+import {
+  ButtonsControl,
+  MapButtonsIcons,
+  MapButtonsTooltip,
+} from '@app/components/commons/map/components/sidebar-controls/sidebar-controls.enums';
 import { ButtonComponent } from './button.component';
 
 export default {

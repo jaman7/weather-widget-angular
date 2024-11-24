@@ -18,15 +18,10 @@ export type ChartOptions = {
 })
 export class ForecastWeatherComponent implements OnInit, OnChanges {
   @Input() forecast: IForecast[] = [];
-
   @ViewChild('forecastTiles') forecastTilesRef!: ElementRef;
-
   chartOptions!: Partial<ChartOptions>;
-
   isDragging = false;
-
   startX = 0;
-
   scrollLeft = 0;
 
   ngOnInit(): void {
@@ -34,15 +29,12 @@ export class ForecastWeatherComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.forecast) {
-      this.setupChartOptions();
-    }
+    if (changes.forecast) this.setupChartOptions();
   }
 
   private setupChartOptions(): void {
     const labels = this.forecast.map(f => new Date((f.dt ?? 0) * 1000).toLocaleString('en-US', { weekday: 'short', hour: 'numeric' }));
     const temperatureData = this.forecast.map(f => f.main?.temp ?? null);
-
     this.chartOptions = {
       series: [{ name: 'Temperature', data: temperatureData }],
       chart: { type: 'line', zoom: { enabled: false }, toolbar: { show: false } },

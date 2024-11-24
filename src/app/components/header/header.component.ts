@@ -29,16 +29,11 @@ export class HeaderComponent implements OnInit {
   pathToParent(array: IMenuConfig[], searchId: string): string {
     let result = '';
     array.some(({ id, name, children = [] }) => {
-      if (id === searchId) {
-        result = name;
-      }
+      if (id === searchId) result = name;
       const temp = this.pathToParent(children, searchId);
-      if (temp) {
-        result = `${name}/${temp}`;
-      }
+      if (temp) result = `${name}/${temp}`;
       return false;
     });
-
     return result;
   }
 

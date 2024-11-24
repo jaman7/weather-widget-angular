@@ -8,9 +8,7 @@ import { IWeatherData } from '../home.model';
 })
 export class CurrentWeatherComponent {
   @Input() weatherData?: IWeatherData | null;
-
   currentDate: Date = new Date();
-
   date: string = `${days[this.currentDate.getDay()]} ${this.currentDate.getDate()} ${months[this.currentDate.getMonth()]}`;
 
   get temperature(): number {

@@ -4,14 +4,10 @@ import { RgbFnStrings } from './map.enums';
 export const hex2rgba = (hex: string, alpha = 1): string => {
   const tmpHex = hex.toLowerCase();
   const { PRE_DATA_RGBA, ALPHA_MSG_ERR } = RgbFnStrings;
-
-  if (alpha > 1 || alpha < 0) {
-    throw new Error(ALPHA_MSG_ERR);
-  }
+  if (alpha > 1 || alpha < 0) throw new Error(ALPHA_MSG_ERR);
   const red = parseInt(tmpHex?.slice(1, 3), 16);
   const green = parseInt(tmpHex?.slice(3, 5), 16);
   const blue = parseInt(tmpHex?.slice(5, 7), 16);
-
   return `${PRE_DATA_RGBA}(${red},${green},${blue},${alpha})`;
 };
 

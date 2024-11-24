@@ -20,17 +20,11 @@ import { MapService } from '../../map.service';
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
   @Input() mapView!: MapView;
-
   query: string = '';
-
   suggestions: any[] = [];
-
   loading: boolean = false;
-
   error: string = '';
-
   isSelecting: boolean = false;
-
   private searchTerms$ = new Subject<string>();
 
   constructor(
@@ -120,7 +114,6 @@ export class MapSearchComponent implements OnInit, OnDestroy {
       duration: 1000,
       easing: t => t * (2 - t),
     });
-
     this.isSelecting = true;
     this.query = suggestion.displayName;
     this.mapService.searchData$.next({ longitude, latitude, city: suggestion?.properties?.name ?? '' });

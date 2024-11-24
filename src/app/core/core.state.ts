@@ -16,11 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [initStateFromLocalStorage];
-
 if (!env.production) metaReducers.unshift(debugReducer);
-
 export const selectLanguageState = createFeatureSelector<LanguageType>('language');
-
 export const selectRouterState = createFeatureSelector<RouterReducerState<SerializedRouterStateSnapshot>>('router');
-
 export const APP_PREFIX = 'test-APP';

@@ -12,48 +12,37 @@ import { WeatherWidgetService } from './weather-widget.service';
 })
 export class WeatherWidgetComponent extends WeatherWidgetService implements OnInit {
   @Input() cities: string[] = [];
-
   public selectedCities$: Observable<IWeatherData[]> = of([]);
-
   public refreshCountdown$: Observable<number>;
-
   public citySelectionCountdown$: Observable<number>;
-
   public refreshProgress$: Observable<number>;
-
   public citySelectionProgress$: Observable<number>;
 
   ngOnInit(): void {
     const refreshInterval = 10000;
     const citySelectionInterval = 60000;
-
     const refresh$ = timer(0, refreshInterval);
     const citySelection$ = timer(0, citySelectionInterval).pipe(
       untilDestroyed(this),
       map(() => this.getRandomCities()),
       shareReplay(1)
     );
-
     this.refreshCountdown$ = timer(0, 1000).pipe(
       untilDestroyed(this),
       map(tick => refreshInterval / 1000 - (tick % (refreshInterval / 1000)))
     );
-
     this.citySelectionCountdown$ = timer(0, 1000).pipe(
       untilDestroyed(this),
       map(tick => citySelectionInterval / 1000 - (tick % (citySelectionInterval / 1000)))
     );
-
     this.refreshProgress$ = this.refreshCountdown$.pipe(
       untilDestroyed(this),
       map(timeLeft => (timeLeft / (refreshInterval / 1000)) * 100)
     );
-
     this.citySelectionProgress$ = this.citySelectionCountdown$.pipe(
       untilDestroyed(this),
       map(timeLeft => (timeLeft / (citySelectionInterval / 1000)) * 100)
     );
-
     this.selectedCities$ = citySelection$.pipe(
       untilDestroyed(this),
       switchMap(cities => refresh$.pipe(switchMap(() => this.loadWeatherData(cities))))

@@ -2,7 +2,6 @@
   <ul class="sidebar-menu" [@expandCollapseHorizontal]="(collapsedSidebarRight$ | async) ? 'final' : 'initial'">
     <ng-container *ngTemplateOutlet="nodes; context: { $implicit: sidebarRightConfig }"></ng-container>
   </ul>
-
   <div class="open-mapsidebar" [ngClass]="(collapsedSidebarRight$ | async) ? 'open' : ''">
     <app-button [isRound]="true" (btnClick)="openSideBar()">
       <i nz-icon nzType="double-left" [ngClass]="(collapsedSidebarRight$ | async) ? 'open' : ''"></i>
@@ -30,7 +29,6 @@
           <i nz-icon [nzType]="btn?.iconType"></i>
         </app-button>
       </div>
-
       <nz-radio-group
         *ngIf="item?.type === 'radio-item' && item?.typeCheckbox === 'weather'"
         class="tile-list"
@@ -41,7 +39,6 @@
           {{ layer.name }}
         </label>
       </nz-radio-group>
-
       <nz-radio-group
         *ngIf="item?.type === 'radio-item' && item?.typeCheckbox === 'tile'"
         class="tile-list"

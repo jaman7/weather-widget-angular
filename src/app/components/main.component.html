@@ -2,7 +2,6 @@
   <header id="main-header" class="main-header">
     <app-header />
   </header>
-
   <section class="main-section" cdkScrollable [@fadeInOut]="getRouterOutletState(outlet)">
     <router-outlet #outlet="outlet" (activate)="onActivate()" (deactivate)="onDeactivate()"></router-outlet>
   </section>

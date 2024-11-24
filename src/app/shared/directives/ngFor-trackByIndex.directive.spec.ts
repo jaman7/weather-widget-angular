@@ -27,11 +27,9 @@ describe('NgForTrackByIndexDirective', () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NgForTrackByIndexDirective],
     });
-
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     debugElements = fixture.debugElement.queryAll(By.css('.item'));
   });
 

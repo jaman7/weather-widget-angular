@@ -30,15 +30,10 @@ export interface IWeatherData {
 })
 export class MapPopupComponent extends WeatherPopupService implements AfterViewInit, OnDestroy {
   @ViewChild('popup') popupEl: ElementRef;
-
   @Input() mapView: MapView;
-
   private overlay: Overlay;
-
   private markerLayer: VectorLayer<VectorSource>;
-
   private currentMarker: Feature;
-
   private coordinatesSubject = new BehaviorSubject<number[]>([]);
 
   details$: Observable<IDataDisplay[]> = this.coordinatesSubject.pipe(
@@ -62,7 +57,6 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
     this.markerLayer = new VectorLayer({
       source: new VectorSource(),
     });
-
     this.mapView.addOverlay(this.overlay);
     this.mapView.addLayer(this.markerLayer);
     this.setupPopup();
@@ -101,11 +95,9 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
       if (currentCoord[0] === coordinate[0] && currentCoord[1] === coordinate[1]) return;
       this.markerLayer.getSource().removeFeature(this.currentMarker);
     }
-
     const marker = new Feature({
       geometry: new Point(coordinate),
     });
-
     marker.setStyle(
       new Style({
         image: new Icon({
@@ -115,7 +107,6 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
         }),
       })
     );
-
     this.markerLayer.getSource().addFeature(marker);
     this.currentMarker = marker;
   }
