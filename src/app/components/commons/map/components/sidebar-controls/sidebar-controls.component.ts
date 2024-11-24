@@ -23,8 +23,8 @@ export class SidebarControlsComponent implements OnInit, OnDestroy {
   sidebarRightConfig = sidebarConfig();
   collapsedSidebarRight$: Observable<boolean> = of(true);
   mapsTilleLayers = MapsTilleLayers;
-  selectedTileLayer = this.mapsTilleLayers[0];
-  selectedBackgroundLayer = TileLayerBackground.find(layer => layer.checked)?.id || 1;
+  selectedTileLayer = this.mapsTilleLayers?.[0];
+  selectedBackgroundLayer = TileLayerBackground?.find(layer => layer.checked)?.id || 1;
 
   actions: { [name: string]: () => void } = {
     [BTN_ZOOM_IN]: (): void => {
