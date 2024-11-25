@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { API_KEY, API_URL } from '@app/components/commons/map/map.constants';
 import { HttpService } from '@app/core';

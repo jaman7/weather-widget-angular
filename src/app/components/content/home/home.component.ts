@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HomeService } from './home.service';
 import { Component } from '@angular/core';
 import { ISearchData } from '@app/components/commons/map/components/map-search/map-search.models';
-import { IWeatherDataResponce } from '@app/shared/model/weather-data';
 import { sunsetSunrise } from '@app/shared/utils/utils';
 import { catchError, combineLatest, lastValueFrom, map, of, shareReplay } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { catchError, combineLatest, lastValueFrom, map, of, shareReplay } from '
 export class HomeComponent {
   cities = ['Lodz', 'Warszawa', 'Berlin', 'New York', 'London'];
 
-  weatherData: IWeatherDataResponce = {};
+  weatherData: any = {};
 
   constructor(public homeService: HomeService) {}
 
