@@ -1,16 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Map as MapView } from 'ol';
-import VectorImageLayer from 'ol/layer/VectorImage';
-import { Feature } from 'ol';
-import { fromLonLat } from 'ol/proj';
-import { Circle as CircleGeom } from 'ol/geom';
-import { Style } from 'ol/style';
-import { catchError, debounceTime, of, Subject, switchMap, tap } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ISearchData } from './map-search.models';
+import { MapSearchService } from './map-search.service';
 import { Colors } from '../../map.constants';
 import { styleFill, styleStroke } from '../../map.helpers';
-import { MapSearchService } from './map-search.service';
 import { MapService } from '../../map.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Map as MapView, Feature } from 'ol';
+import { Circle as CircleGeom } from 'ol/geom';
+import VectorImageLayer from 'ol/layer/VectorImage';
+import { fromLonLat } from 'ol/proj';
+import { Style } from 'ol/style';
+import { catchError, debounceTime, of, Subject, switchMap, tap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -20,11 +20,17 @@ import { MapService } from '../../map.service';
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
   @Input() mapView!: MapView;
+
   query: string = '';
-  suggestions: any[] = [];
+
+  suggestions: ISearchData[] = [];
+
   loading: boolean = false;
+
   error: string = '';
+
   isSelecting: boolean = false;
+
   private searchTerms$ = new Subject<string>();
 
   constructor(
@@ -49,7 +55,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
           )
         ),
         tap(data => {
-          this.suggestions = data;
+          this.suggestions = data as ISearchData[];
           this.loading = false;
         }),
         untilDestroyed(this)
@@ -90,10 +96,10 @@ export class MapSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleSelectSuggestion(suggestion: any): void {
-    const { longitude, latitude } = suggestion?.properties?.coordinates || {};
+  handleSelectSuggestion(suggestion: ISearchData): void {
+    const { longitude, latitude, city = '' } = suggestion || {};
     const view = this.mapView.getView();
-    const targetCoordinates = fromLonLat([parseFloat(longitude), parseFloat(latitude)]);
+    const targetCoordinates = fromLonLat([longitude, latitude]);
     const currentLayer = this.getCurrentVectorImageLayer();
     const vectorSource = currentLayer?.getSource();
     vectorSource?.clear();
@@ -116,7 +122,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
     });
     this.isSelecting = true;
     this.query = suggestion.displayName;
-    this.mapService.searchData$.next({ longitude, latitude, city: suggestion?.properties?.name ?? '' });
+    this.mapService.searchData$.next({ longitude, latitude, city });
     this.suggestions = [];
   }
 

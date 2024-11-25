@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
-import TileLayer from 'ol/layer/Tile';
-import VectorImageLayer from 'ol/layer/VectorImage';
-import { Map as MapView, View } from 'ol';
-import { OSM } from 'ol/source';
-import VectorSource from 'ol/source/Vector';
-import { defaults as defaultControls } from 'ol/control';
-import { tap } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { easeOut } from 'ol/easing';
+import { ISearchData } from './components/map-search/map-search.models';
+import { TileLayerBackground } from './components/sidebar-controls/sidebar-controls.config';
 import { MapConsts, ViewOptions } from './map.constants';
 import { MapService } from './map.service';
-import { TileLayerBackground } from './components/sidebar-controls/sidebar-controls.config';
-import { ISearchData } from './components/map-search/map-search.models';
+import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Map as MapView, View } from 'ol';
+import { defaults as defaultControls } from 'ol/control';
+import { easeOut } from 'ol/easing';
+import TileLayer from 'ol/layer/Tile';
+import VectorImageLayer from 'ol/layer/VectorImage';
+import { OSM } from 'ol/source';
+import VectorSource from 'ol/source/Vector';
+import { tap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -21,14 +21,21 @@ import { ISearchData } from './components/map-search/map-search.models';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() height = '50vh';
+
   @Output() mapReady = new EventEmitter<MapView>();
+
   @Output() searchTerm = new EventEmitter<ISearchData>(null);
+
   mapView!: MapView;
+
   vectorSource = new VectorSource();
+
   selectedLayerForLegend = '';
+
   tileLayer = new TileLayer({
     source: new OSM(),
   });
+
   vectorLayerTop = new VectorImageLayer({
     source: this.vectorSource,
   });
@@ -82,7 +89,9 @@ export class MapComponent implements OnInit, OnDestroy {
     selectedLayerForLegend$
       .pipe(
         untilDestroyed(this),
-        tap(name => (this.selectedLayerForLegend = name))
+        tap(name => {
+          this.selectedLayerForLegend = name;
+        })
       )
       .subscribe();
 

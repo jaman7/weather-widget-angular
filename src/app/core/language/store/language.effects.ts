@@ -1,8 +1,8 @@
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { APP_PREFIX } from '@app/core/core.state';
 import { ActionLanguageChange, LanguageActionTypes } from './language.actions';
+import { Injectable } from '@angular/core';
+import { APP_PREFIX } from '@app/core/core.state';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class LanguageEffects {

@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Injector, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ErrorInterceptor } from './http/error.interceptor';
 import { HttpClientModule } from './http/httpclient.module';
 import { TranslateCoreModule } from './translate-core.module';
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorInterceptor } from './http/error.interceptor';
+import { Injector, NgModule, Optional, SkipSelf } from '@angular/core';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateCoreModule],

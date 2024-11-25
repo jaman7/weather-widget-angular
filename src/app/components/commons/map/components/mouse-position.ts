@@ -1,9 +1,9 @@
+import { MapSourceClass, TypeEPSG } from '../map.enums';
 import { Component, ChangeDetectionStrategy, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { Map as MapView } from 'ol';
 import MousePosition from 'ol/control/MousePosition';
 import { toStringXY } from 'ol/coordinate';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { MapSourceClass, TypeEPSG } from '../map.enums';
 
 const { EPSG4326 } = TypeEPSG;
 const { MOUSE_POSITION_CONTROL } = MapSourceClass;
@@ -17,7 +17,9 @@ const { MOUSE_POSITION_CONTROL } = MapSourceClass;
 })
 export class MapMousePositionComponent implements AfterViewInit {
   @Input() mapView: MapView;
+
   @Input() positionTemplate?: string;
+
   control?: MousePosition;
 
   constructor(private element: ElementRef) {}

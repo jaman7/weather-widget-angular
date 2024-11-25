@@ -1,5 +1,5 @@
-import { fromLonLat } from 'ol/proj';
 import { TypeEPSG } from './map.enums';
+import { fromLonLat } from 'ol/proj';
 
 const { EPSG3857 } = TypeEPSG;
 export const API_URL = 'https://api.openweathermap.org/data/2.5';

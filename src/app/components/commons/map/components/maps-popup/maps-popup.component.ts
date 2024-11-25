@@ -1,26 +1,18 @@
+import { IDataDisplay } from './maps-popup.models';
+import { WeatherPopupService } from './maps-popup.service';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
-import { BehaviorSubject, of, Observable } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { Map as MapView } from 'ol';
+import { IWeatherDataResponce } from '@app/shared/model/weather-data';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Map as MapView, Feature } from 'ol';
+import { Point } from 'ol/geom';
+import VectorLayer from 'ol/layer/Vector';
 import Overlay from 'ol/Overlay';
 import { toLonLat } from 'ol/proj';
-import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Feature } from 'ol';
-import { Point } from 'ol/geom';
-import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { WeatherPopupService } from './maps-popup.service';
-
-export interface IDataDisplay {
-  label?: string;
-  value?: string | number | null;
-}
-
-export interface IWeatherData {
-  [name: string]: any;
-}
+import Style from 'ol/style/Style';
+import { BehaviorSubject, of, Observable } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 @UntilDestroy()
 @Component({
@@ -30,10 +22,15 @@ export interface IWeatherData {
 })
 export class MapPopupComponent extends WeatherPopupService implements AfterViewInit, OnDestroy {
   @ViewChild('popup') popupEl: ElementRef;
+
   @Input() mapView: MapView;
+
   private overlay: Overlay;
+
   private markerLayer: VectorLayer<VectorSource>;
+
   private currentMarker: Feature;
+
   private coordinatesSubject = new BehaviorSubject<number[]>([]);
 
   details$: Observable<IDataDisplay[]> = this.coordinatesSubject.pipe(
@@ -42,7 +39,7 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
     distinctUntilChanged((prev, curr) => prev[0] === curr[0] && prev[1] === curr[1]),
     switchMap(([lon, lat]) =>
       this.getWeatherData(lat, lon).pipe(
-        map(data => (data ? this.mapToDetails(data) : [])),
+        map(data => (data ? this.mapToDetails(data as IWeatherDataResponce) : [])),
         catchError(() => of([{ label: 'Data unavailable', value: '' }]))
       )
     ),
@@ -79,7 +76,7 @@ export class MapPopupComponent extends WeatherPopupService implements AfterViewI
     });
   }
 
-  private mapToDetails(data: IWeatherData): IDataDisplay[] {
+  private mapToDetails(data: IWeatherDataResponce): IDataDisplay[] {
     const { wind, clouds, main } = data || {};
     return [
       { label: 'Temperature:', value: `${Math.floor((main?.temp as number) ?? 0)}°C` },

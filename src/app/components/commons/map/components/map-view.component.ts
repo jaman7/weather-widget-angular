@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef } from '@angular/core';
-import { Map as MapView } from 'ol';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { Map as MapView } from 'ol';
 
 @UntilDestroy()
 @Component({

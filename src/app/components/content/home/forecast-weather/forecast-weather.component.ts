@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { IForecast } from '@app/shared/model/weather-data';
 import { ApexAxisChartSeries, ApexChart, ApexFill, ApexMarkers, ApexXAxis, ApexYAxis, ApexTooltip } from 'ng-apexcharts';
-import { IForecast } from '../home.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -18,10 +18,15 @@ export type ChartOptions = {
 })
 export class ForecastWeatherComponent implements OnInit, OnChanges {
   @Input() forecast: IForecast[] = [];
+
   @ViewChild('forecastTiles') forecastTilesRef!: ElementRef;
+
   chartOptions!: Partial<ChartOptions>;
+
   isDragging = false;
+
   startX = 0;
+
   scrollLeft = 0;
 
   ngOnInit(): void {

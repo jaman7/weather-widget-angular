@@ -1,7 +1,7 @@
-import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
-import { safelyParseJSON, toCamelCase } from '@app/shared/utils/utils';
 import { APP_PREFIX, AppState } from '../core.state';
 import { AbstractStorageService, SessionStorageService } from '../session-storage/session-storage.service';
+import { safelyParseJSON, toCamelCase } from '@app/shared/utils/utils';
+import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
 
 const storageService: AbstractStorageService = new SessionStorageService();
 
@@ -9,15 +9,15 @@ export function getStateKeys(storageKey: string): string[] {
   return storageKey?.replace(APP_PREFIX, '')?.toLowerCase()?.split('.')?.map(toCamelCase) ?? [];
 }
 
-function updateNestedState(state: any, keys: string[], value: any): any {
+function updateNestedState<T extends Record<string, T>>(state: T, keys: string[], value: T): T {
   return keys.reduceRight((acc, key, index) => {
     if (index === keys.length - 1) return { ...state, [key]: value };
-    return { ...state, [key]: { ...state[key], ...acc } };
-  }, {});
+    return { ...state, [key]: { ...(state[key] || {}), ...acc } };
+  }, {} as T);
 }
 
-export function loadInitialState(): Record<string, any> {
-  return Object.keys(sessionStorage).reduce((state: any, storageKey: string) => {
+export function loadInitialState<T>(): Record<string, T> {
+  return Object.keys(sessionStorage).reduce((state: T, storageKey: string) => {
     if (!storageKey.startsWith(APP_PREFIX)) return state;
     const storedItem = storageService.getItem(storageKey);
     if (!storedItem) return state;

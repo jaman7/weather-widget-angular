@@ -15,8 +15,6 @@ export class NgForTrackByIndexDirective<T extends Item> {
   }
 
   private trackByFn(index: number, item: T): number | string {
-    const trackByValue = item.id ?? index;
-    console.log(`trackBy called for index: ${index}, id: ${item.id}, fallback: ${trackByValue}`);
-    return trackByValue;
+    return item.id ?? index;
   }
 }

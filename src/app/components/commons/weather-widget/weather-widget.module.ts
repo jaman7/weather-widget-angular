@@ -1,6 +1,6 @@
+import { WeatherWidgetComponent } from './weather-widget.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared';
-import { WeatherWidgetComponent } from './weather-widget.component';
 
 @NgModule({
   declarations: [WeatherWidgetComponent],

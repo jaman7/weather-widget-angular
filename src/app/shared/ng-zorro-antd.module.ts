@@ -15,10 +15,10 @@ import {
   MinusCircleOutline,
 } from '@ant-design/icons-angular/icons';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 export const icons: IconDefinition[] = [
   StepBackwardOutline,

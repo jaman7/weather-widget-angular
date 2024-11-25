@@ -1,5 +1,5 @@
-import { Fill, Stroke } from 'ol/style';
 import { RgbFnStrings } from './map.enums';
+import { Fill, Stroke } from 'ol/style';
 
 export const hex2rgba = (hex: string, alpha = 1): string => {
   const tmpHex = hex.toLowerCase();

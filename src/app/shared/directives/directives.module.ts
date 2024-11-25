@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { NgForTrackByIndexDirective } from './ngFor-trackByIndex.directive';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [],

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@app/core';
-import { Observable } from 'rxjs';
-import { IParams } from '@app/core/http/http.model';
 import { API_KEY, API_URL } from '@app/components/commons/map/map.constants';
+import { HttpService } from '@app/core';
+import { IParams } from '@app/core/http/http.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { API_KEY, API_URL } from '@app/components/commons/map/map.constants';
 export abstract class WeatherPopupService extends HttpService {
   private baseUrl = `${API_URL}/weather`;
 
-  getWeatherData(lat: number, lon: number): Observable<any> {
+  getWeatherData<T>(lat: number, lon: number): Observable<T> {
     const params: IParams = {
       lat,
       lon,

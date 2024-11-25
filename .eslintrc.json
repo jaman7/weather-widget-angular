@@ -9,12 +9,6 @@
     "node": true,
     "es2020": true
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": [
-      "./tsconfig.spec.json"
-    ]
-  },
   "plugins": [
     "@typescript-eslint"
   ],
@@ -40,73 +34,24 @@
         "style": "kebab-case"
       }
     ],
-    "class-methods-use-this": "error",
+    "class-methods-use-this": "off",
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import/no-extraneous-dependencies": "error",
+    "import/no-extraneous-dependencies": "off",
     "@typescript-eslint/explicit-function-return-type": "error",
     "no-use-before-define": [
       "error",
       {
-        "functions": true,
+        "functions": false,
         "classes": true,
         "variables": true
       }
     ],
-    "import/no-default-export": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-empty-function": "error",
-    "lines-between-class-members": [
-      "error",
-      "always"
-    ],
-    "no-console": [
-      "error",
-      {
-        "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ],
-    "prefer-destructuring": [
-      "error",
-      {
-        "object": true,
-        "array": true
-      }
-    ],
-    "@typescript-eslint/unbound-method": [
-      "error",
-      {
-        "ignoreStatic": true
-      }
-    ],
-    "max-classes-per-file": [
-      "error",
-      {
-        "ignoreExpressions": true,
-        "max": 2
-      }
-    ],
-    "@typescript-eslint/init-declarations": "error",
-    "@typescript-eslint/indent": [
-      "error",
-      {
-        "SwitchCase": 1,
-        "ignoredNodes": [
-          "TemplateLiteral *"
-        ],
-        "flatTernaryExpressions": false
-      }
-    ],
-    "no-underscore-dangle": "off",
-    "no-undef": "error",
-    "no-restricted-syntax": "off"
+    "import/no-default-export": "error"
   },
   "overrides": [
     {
@@ -135,8 +80,60 @@
         ]
       },
       "rules": {
-        "import/no-unresolved": "error",
-        "import/prefer-default-export": "error",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              [
+                "builtin",
+                "external",
+                "internal",
+                "parent",
+                "sibling",
+                "index"
+              ]
+            ],
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ],
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "lines-between-class-members": [
+          "error",
+          "always"
+        ],
+        "prettier/prettier": "error",
+        "class-methods-use-this": "off",
+        "valid-typeof": "off",
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
           "error",
           {
@@ -144,19 +141,39 @@
             "args": "after-used"
           }
         ],
-        "padding-line-between-statements": [
+        "prefer-destructuring": [
           "error",
           {
-            "blankLine": "never",
-            "prev": "directive",
-            "next": "expression"
-          },
-          {
-            "blankLine": "never",
-            "prev": "expression",
-            "next": "expression"
+            "object": true,
+            "array": true
           }
-        ]
+        ],
+        "@typescript-eslint/unbound-method": [
+          "error",
+          {
+            "ignoreStatic": true
+          }
+        ],
+        "max-classes-per-file": [
+          "error",
+          {
+            "ignoreExpressions": true,
+            "max": 2
+          }
+        ],
+        "init-declarations": "off",
+        "@typescript-eslint/init-declarations": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "no-underscore-dangle": "off",
+        "no-use-before-define": [
+          "error",
+          {
+            "functions": true,
+            "classes": true
+          }
+        ],
+        "no-undef": "error",
+        "no-restricted-syntax": "off"
       }
     },
     {
@@ -188,10 +205,18 @@
     },
     {
       "files": [
+        "*.stories.ts"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": [
         "*.spec.ts"
       ],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "off"
+        "import/no-extraneous-dependencies": "off"
       }
     },
     {
@@ -213,6 +238,29 @@
       },
       "rules": {
         "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": [
+        "e2e/**/*.e2e-spec.ts",
+        "e2e/**/*.po.ts"
+      ],
+      "parserOptions": {
+        "project": "./e2e/tsconfig.json"
+      },
+      "extends": [
+        "plugin:protractor/recommended"
+      ],
+      "plugins": [
+        "protractor"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
       }
     }
   ]

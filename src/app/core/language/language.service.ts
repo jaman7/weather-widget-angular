@@ -1,17 +1,20 @@
-import { Observable, forkJoin, Subscription, of, lastValueFrom } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { catchError, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import buildEnvironment from '@env/build-environment';
 import { AppState, selectLanguageState } from '../core.state';
 import { DEFAULT_LANGUAGE, INITIAL_PARTIALS } from './language.config';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import buildEnvironment from '@env/build-environment';
+import { Store, select } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, forkJoin, Subscription, of, lastValueFrom } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LanguageService {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private translations: { [key: string]: any } = {};
+
   private downloadedPartials = new Set<string>();
+
   private initialPartials = new Set<string>(INITIAL_PARTIALS);
 
   constructor(
@@ -44,7 +47,7 @@ export class LanguageService {
     if (this.downloadedPartials.has(partial)) return of(null);
     this.downloadedPartials.add(partial);
     const buildTimestamp = new Date(buildEnvironment.buildTimestamp).getTime();
-    return this.http.get<any>(`assets/i18Local/${lang}/${partial}.json?v=${buildTimestamp}`).pipe(
+    return this.http.get<T>(`assets/i18Local/${lang}/${partial}.json?v=${buildTimestamp}`).pipe(
       tap(response => {
         const translations = {
           ...this.translate.translations[lang],

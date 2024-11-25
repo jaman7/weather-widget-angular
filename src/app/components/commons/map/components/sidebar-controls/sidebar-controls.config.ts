@@ -1,8 +1,8 @@
-import { OSM, XYZ } from 'ol/source';
-import TileLayer from 'ol/layer/Tile';
-import { API_KEY } from '@app/components/commons/map/map.constants';
 import { ButtonsControl, MapButtonsIcons, MapButtonsTooltip } from './sidebar-controls.enums';
 import { ISidebarConfig } from './sidebar-controls.models';
+import { API_KEY } from '@app/components/commons/map/map.constants';
+import TileLayer from 'ol/layer/Tile';
+import { OSM, XYZ } from 'ol/source';
 
 const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 const { HOME_TOOLTIP, ZOOM_IN_TOOLTIP, ZOOM_OUT_TOOLTIP } = MapButtonsTooltip;

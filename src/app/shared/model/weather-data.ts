@@ -54,7 +54,7 @@ export interface IForecast {
   dt_txt?: string;
 }
 
-export interface IWeatherData {
+export interface IWeatherDataResponce {
   coord?: ICoord;
   weather?: IWeather[];
   base?: string;

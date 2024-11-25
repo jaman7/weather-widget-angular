@@ -1,7 +1,7 @@
-import { HttpParams } from '@angular/common/http';
 import { IParams } from './http.model';
+import { HttpParams } from '@angular/common/http';
 
-export function preparedHttpParamsValue(value: any): string {
+export function preparedHttpParamsValue<T>(value: T): string {
   if (value instanceof String) return value.toString();
   if (Array.isArray(value)) return value.join('&');
   return value.toString();

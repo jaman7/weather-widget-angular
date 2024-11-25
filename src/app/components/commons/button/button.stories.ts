@@ -1,11 +1,11 @@
-import { StoryObj, Meta } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { ButtonComponent } from './button.component';
 import {
   ButtonsControl,
   MapButtonsIcons,
   MapButtonsTooltip,
 } from '@app/components/commons/map/components/sidebar-controls/sidebar-controls.enums';
-import { ButtonComponent } from './button.component';
+import { action } from '@storybook/addon-actions';
+import { StoryObj, Meta } from '@storybook/angular';
 
 export default {
   title: 'Components/Buttons',
@@ -16,7 +16,6 @@ export default {
     icon: { control: 'text', description: 'Icon type name from Ant Design Icons.' },
     disabled: { control: 'boolean', description: 'If true, the button will be disabled and non-clickable.' },
     type: { control: 'text', description: 'Defines the HTML button type, e.g., button, submit, reset.' },
-    className: { control: 'text', description: 'CSS class applied to the button for styling purposes.' },
     isRound: { control: 'boolean', description: 'If true, makes the button circular.' },
     customClass: { control: 'text', description: 'Additional CSS class for custom styling.' },
     tooltipTitle: { control: 'text', description: 'Tooltip text displayed on hover.' },
@@ -35,7 +34,7 @@ const generateRandomId = (): number => Math.floor(Math.random() * 1000);
 type ButtonStory = StoryObj<ButtonComponent>;
 
 const createClickHandler =
-  (actionFn: any, id: number) =>
+  (actionFn: (id: number) => void, id: number) =>
   (button: HTMLButtonElement): void => {
     button.addEventListener('click', () => {
       actionFn(id);
@@ -48,7 +47,7 @@ export const DefaultButton: ButtonStory = {
     name: BTN_HOME,
     btnClick: action('MouseEvent for Default button'),
     type: 'button',
-    className: 'default-button',
+    customClass: 'default-button',
   },
   play: async ({ args, canvasElement }) => {
     const button = canvasElement.querySelector('button');
@@ -99,7 +98,6 @@ export const SubmitButton: ButtonStory = {
     name: 'Submit',
     type: 'submit',
     btnClick: action('Submit button clicked'),
-    className: 'default-button',
   },
 };
 
@@ -145,7 +143,7 @@ export const RoundButtonWithTooltipHover: ButtonStory = {
     tooltipTitle: HOME_TOOLTIP,
     btnClick: action('Round button with tooltip hover clicked'),
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const button = canvasElement.querySelector('button');
     button?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true })); // Hover state test
   },

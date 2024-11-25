@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef } from '@angular/core';
-import Map from 'ol/Map';
-import ScaleLine from 'ol/control/ScaleLine';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import ScaleLine from 'ol/control/ScaleLine';
+import Map from 'ol/Map';
 
 @UntilDestroy()
 @Component({
@@ -12,6 +12,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 })
 export class MapScalelineComponent implements OnInit {
   @Input() mapView: Map;
+
   control?: ScaleLine;
 
   constructor(private elementRef: ElementRef) {}

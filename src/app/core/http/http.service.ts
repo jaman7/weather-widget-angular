@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { environment as env } from '@env/environment';
-import { toHttpParams } from './http.utils';
 import { HttpOptions, HttpRequestOptions, IParams } from './http.model';
+import { toHttpParams } from './http.utils';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment as env } from '@env/environment';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable()
 export abstract class HttpService {
@@ -21,7 +21,7 @@ export abstract class HttpService {
     });
   }
 
-  protected post<T>(url: string, data: any, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
+  protected post<T>(url: string, data: T, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
     const finalUrl = this.createUrl(url, useFullUrl);
     return this.http.post<T>(finalUrl, data, {
       ...options,
@@ -29,7 +29,7 @@ export abstract class HttpService {
     });
   }
 
-  protected patch<T>(url: string, data: any, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
+  protected patch<T>(url: string, data: T, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
     const finalUrl = this.createUrl(url, useFullUrl);
     return this.http.patch<T>(finalUrl, data, {
       ...options,
@@ -37,7 +37,7 @@ export abstract class HttpService {
     });
   }
 
-  protected put<T>(url: string, data: any, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
+  protected put<T>(url: string, data: T, options: HttpOptions = {}, useFullUrl: boolean = false): Observable<T> {
     const finalUrl = this.createUrl(url, useFullUrl);
     return this.http.put<T>(finalUrl, data, {
       ...options,
@@ -53,7 +53,7 @@ export abstract class HttpService {
     });
   }
 
-  protected response(method: string, url: string, options: HttpRequestOptions = {}, useFullUrl: boolean = false): Observable<any> {
+  protected response<T>(method: string, url: string, options: HttpRequestOptions = {}, useFullUrl: boolean = false): Observable<T> {
     const finalUrl = this.createUrl(url, useFullUrl);
     return this.http.request(method, finalUrl, {
       ...options,

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { catchError, combineLatest, lastValueFrom, map, of, shareReplay } from 'rxjs';
-import { ISearchData } from '@app/components/commons/map/components/map-search/map-search.models';
-import { sunsetSunrise } from '@app/shared/utils/utils';
-import { IWeatherData } from './home.model';
 import { HomeService } from './home.service';
+import { Component } from '@angular/core';
+import { ISearchData } from '@app/components/commons/map/components/map-search/map-search.models';
+import { IWeatherDataResponce } from '@app/shared/model/weather-data';
+import { sunsetSunrise } from '@app/shared/utils/utils';
+import { catchError, combineLatest, lastValueFrom, map, of, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,8 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent {
   cities = ['Lodz', 'Warszawa', 'Berlin', 'New York', 'London'];
-  weatherData: IWeatherData = {};
+
+  weatherData: IWeatherDataResponce = {};
 
   constructor(public homeService: HomeService) {}
 
@@ -20,7 +21,7 @@ export class HomeComponent {
     const { city, latitude, longitude } = data || {};
     combineLatest([lastValueFrom(this.homeService.getWeather(city)), lastValueFrom(this.homeService.getForecast(latitude, longitude))])
       .pipe(
-        map(([weather, forecast]: any): void => {
+        map(([weather, forecast]): void => {
           if (weather && forecast?.list?.length) {
             const sunset = sunsetSunrise(weather?.sys?.sunset || 0);
             const sunrise = sunsetSunrise(weather?.sys?.sunrise || 0);
@@ -34,7 +35,7 @@ export class HomeComponent {
           }
         }),
         shareReplay(1),
-        catchError((): any => of(false))
+        catchError(() => of(false))
       )
       .subscribe();
   }

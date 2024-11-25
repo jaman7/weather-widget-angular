@@ -1,9 +1,9 @@
-import { ActionReducerMap, createFeatureSelector, MetaReducer } from '@ngrx/store';
-import { environment as env } from '@env/environment';
-import { debugReducer, initStateFromLocalStorage } from '@app/core/meta-reducers/init-state-storage.reducer';
-import { routerReducer, RouterReducerState, SerializedRouterStateSnapshot } from '@ngrx/router-store';
-import { languageReducer } from './language/store';
 import { LanguageType } from './language/language.models';
+import { languageReducer } from './language/store';
+import { debugReducer, initStateFromLocalStorage } from '@app/core/meta-reducers/init-state-storage.reducer';
+import { environment as env } from '@env/environment';
+import { routerReducer, RouterReducerState, SerializedRouterStateSnapshot } from '@ngrx/router-store';
+import { ActionReducerMap, createFeatureSelector, MetaReducer } from '@ngrx/store';
 
 export interface AppState {
   language: LanguageType;

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { SharedLibraryModule } from './shared-library.module';
 import { DirectivesModule } from './directives/directives.module';
+import { SharedLibraryModule } from './shared-library.module';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [SharedLibraryModule, DirectivesModule],

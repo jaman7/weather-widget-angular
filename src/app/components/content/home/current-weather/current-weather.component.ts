@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
 import { days, months } from './current-weather.constants';
-import { IWeatherData } from '../home.model';
+import { Component, Input } from '@angular/core';
+import { IWeatherDataResponce } from '@app/shared/model/weather-data';
 
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
 })
 export class CurrentWeatherComponent {
-  @Input() weatherData?: IWeatherData | null;
+  @Input() weatherData?: IWeatherDataResponce | null;
+
   currentDate: Date = new Date();
+
   date: string = `${days[this.currentDate.getDay()]} ${this.currentDate.getDate()} ${months[this.currentDate.getMonth()]}`;
 
   get temperature(): number {

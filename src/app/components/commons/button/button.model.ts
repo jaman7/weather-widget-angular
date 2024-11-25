@@ -8,6 +8,6 @@ export interface IButton {
   tooltipClassName?: string;
   isRound?: boolean;
   icon?: string;
-  [name: string]: string | number | boolean | any;
+  ariaLabel?: string;
   disabled?: boolean;
 }

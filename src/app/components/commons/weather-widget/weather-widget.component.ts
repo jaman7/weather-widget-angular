@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { combineLatest, map, Observable, of, shareReplay, switchMap, timer } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IWeatherData } from './weather-widget.model';
 import { WeatherWidgetService } from './weather-widget.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { combineLatest, map, Observable, of, shareReplay, switchMap, timer } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -12,10 +12,15 @@ import { WeatherWidgetService } from './weather-widget.service';
 })
 export class WeatherWidgetComponent extends WeatherWidgetService implements OnInit {
   @Input() cities: string[] = [];
+
   public selectedCities$: Observable<IWeatherData[]> = of([]);
+
   public refreshCountdown$: Observable<number>;
+
   public citySelectionCountdown$: Observable<number>;
+
   public refreshProgress$: Observable<number>;
+
   public citySelectionProgress$: Observable<number>;
 
   ngOnInit(): void {

@@ -1,0 +1,933 @@
+.editorconfig
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.ts]
+quote_type = single
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[*.scss]
+trim_trailing_whitespace = true
+
+.eslintrc.json
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:@angular-eslint/recommended",
+    "eslint:recommended",
+    "plugin:storybook/recommended"
+  ],
+  "rules": {
+    "@angular-eslint/directive-selector": [
+      "error",
+      {
+        "type": "attribute",
+        "prefix": "app",
+        "style": "camelCase"
+      }
+    ],
+    "@angular-eslint/component-selector": [
+      "error",
+      {
+        "type": "element",
+        "prefix": "app",
+        "style": "kebab-case"
+      }
+    ],
+    "class-methods-use-this": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+    "import/no-default-export": "error"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "@angular-eslint"
+      ],
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "eslint:recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": [
+          "tsconfig.eslint.json"
+        ]
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              [
+                "builtin",
+                "external"
+              ],
+              [
+                "internal",
+                "parent",
+                "sibling",
+                "index"
+              ]
+            ],
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ],
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "lines-between-class-members": "off",
+        "prettier/prettier": "error",
+        "class-methods-use-this": "off",
+        "valid-typeof": "off",
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "args": "after-used"
+          }
+        ],
+        "prefer-destructuring": [
+          "error",
+          {
+            "object": true,
+            "array": true
+          }
+        ],
+        "@typescript-eslint/unbound-method": [
+          "error",
+          {
+            "ignoreStatic": true
+          }
+        ],
+        "max-classes-per-file": [
+          "error",
+          {
+            "ignoreExpressions": true,
+            "max": 2
+          }
+        ],
+        "init-declarations": "off",
+        "@typescript-eslint/init-declarations": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-underscore-dangle": "off",
+        "no-use-before-define": [
+          "error",
+          {
+            "functions": true,
+            "classes": true
+          }
+        ],
+        "no-undef": "error",
+        "no-restricted-syntax": "off"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "plugins": [
+        "@angular-eslint/template",
+        "prettier"
+      ],
+      "parser": "@angular-eslint/template-parser",
+      "excludedFiles": [
+        "*inline-template-*.component.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "angular",
+            "endOfLine": "auto",
+            "bracketSameLine": false
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.spec.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": [
+        "src/**/*.spec.ts",
+        "src/**/*.d.ts"
+      ],
+      "parserOptions": {
+        "project": "./src/tsconfig.spec.json"
+      },
+      "extends": [
+        "plugin:jest/recommended"
+      ],
+      "plugins": [
+        "jest"
+      ],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": [
+        "e2e/**/*.e2e-spec.ts",
+        "e2e/**/*.po.ts"
+      ],
+      "parserOptions": {
+        "project": "./e2e/tsconfig.json"
+      },
+      "extends": [
+        "plugin:protractor/recommended"
+      ],
+      "plugins": [
+        "protractor"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    }
+  ]
+}
+
+.lintstagedrc
+{
+  '{,src/**/}*.{md,json,ts,tsx,js,jsx,css,scss,html,yml}': ['git add']
+}
+
+.prettierrc
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "trailingComma": "es5",
+  "bracketSameLine": false,
+  "printWidth": 140,
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.component.html",
+      "options": {
+        "parser": "angular"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
+
+.stylelintrc
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreFunctions": [
+          "t",
+          "var"
+        ]
+      }
+    ],
+    "scss/dollar-variable-pattern": [
+      "[a-z][a-zA-Z]+",
+      {
+        "ignore": "local"
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
+      }
+    ],
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "scss/no-global-function-names": null,
+    "color-no-invalid-hex": true
+  }
+}
+
+angular.json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "testApp",
+  "projects": {
+    "testApp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "target/www",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              {
+                "input": "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+                "bundleName": "antd"
+              },
+              {
+                "input": "src/styles.scss",
+                "bundleName": "app"
+              },
+              {
+                "input": "node_modules/ol/ol.css",
+                "bundleName": "ol"
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/scss"
+              ]
+            },
+            "scripts": [],
+            "allowedCommonJsDependencies": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4200
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "testApp:build:production"
+            },
+            "development": {
+              "buildTarget": "testApp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ],
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "devServerTarget": "testApp:serve",
+            "protractorConfig": "e2e/protractor.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "testApp:serve:production"
+            }
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "testApp:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "testApp:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "outputDir": "storybook-static"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": false
+  }
+}
+
+generate-build-environment.js
+const path = require('path');
+const fs = require('fs');
+
+const packageJsonPath = path.resolve(__dirname, 'package.json');
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
+const buildTimestamp = new Date().toISOString();
+const buildEnvironment = `
+const buildEnvironment = {
+  production: true,
+  version: '${packageJson.version}',
+  buildTimestamp: '${buildTimestamp}'
+};
+
+export default buildEnvironment;
+`;
+
+const outputPath = path.resolve(__dirname, 'src/environments/build-environment.ts');
+fs.writeFileSync(outputPath, buildEnvironment, 'utf8');
+console.log('Build environment file generated successfully!');
+
+jest.config.js
+globalThis.ngJest = {
+  skipNgcc: true,
+  tsconfig: 'tsconfig.spec.json',
+};
+
+/** @type {import('@jest/types').Config.InitialOptions} */
+module.exports = {
+  preset: 'jest-preset-angular',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  transform: {
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+  },
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  moduleDirectories: ['node_modules', 'src'],
+  moduleNameMapper: {
+    '^@app/(.*)$': '<rootDir>/src/app/$1',
+    '^@env/(.*)$': '<rootDir>/src/environments/$1',
+    '^.+\\.(ts|html)$': 'jest-preset-angular',
+    '\\.(scss|css|sass)$': 'identity-obj-proxy',
+  },
+  moduleFileExtensions: ['ts', 'html', 'js', 'json'],
+  fakeTimers: {
+    enableGlobally: true,
+  },
+};
+
+package.json
+{
+  "name": "weather-widget-angular",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=18.18.0",
+    "npm": ">=9.8.1"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run prebuild && ng serve",
+    "prebuild": "node generate-build-environment.js",
+    "build": "npm run prebuild && ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prettier:format": "prettier --write --html-whitespace-sensitivity ignore src/**/*{.ts,.json,.css,.scss,.html}",
+    "prepare": "husky .husky",
+    "storybook": "ng run testApp:storybook",
+    "build-storybook": "ng run testApp:build-storybook"
+  },
+  "private": true,
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,yml,html,md,json}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@angular/animations": "^18.2.3",
+    "@angular/cdk": "^18.2.3",
+    "@angular/common": "^18.2.3",
+    "@angular/compiler": "^18.2.3",
+    "@angular/core": "^18.2.12",
+    "@angular/forms": "^18.2.3",
+    "@angular/platform-browser": "^18.2.3",
+    "@angular/platform-browser-dynamic": "^18.2.3",
+    "@angular/router": "^18.2.3",
+    "@ant-design/icons-angular": "^18.0.0",
+    "@ngneat/until-destroy": "^10.0.0",
+    "@ngrx/effects": "^18.0.2",
+    "@ngrx/entity": "^18.0.2",
+    "@ngrx/router-store": "^18.0.2",
+    "@ngrx/store": "^18.0.2",
+    "@ngrx/store-devtools": "^18.0.2",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
+    "@storybook/addon-actions": "^8.4.3",
+    "@storybook/addon-docs": "^8.4.3",
+    "@storybook/addon-essentials": "^8.4.3",
+    "@storybook/addon-interactions": "^8.4.3",
+    "@storybook/addon-onboarding": "^8.4.3",
+    "@storybook/blocks": "^8.4.3",
+    "@storybook/test": "^8.4.3",
+    "apexcharts": "^3.54.1",
+    "ng-apexcharts": "^1.12.0",
+    "ng-zorro-antd": "^18.1.1",
+    "ol": "^10.2.1",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.3.0",
+    "uuid": "^10.0.0",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-builders/jest": "^18.0.0",
+    "@angular-devkit/build-angular": "^18.2.3",
+    "@angular-eslint/eslint-plugin": "^18.3.1",
+    "@angular-eslint/eslint-plugin-template": "^18.3.1",
+    "@angular-eslint/schematics": "^18.3.1",
+    "@angular-eslint/template-parser": "^18.3.1",
+    "@angular/cli": "^18.2.3",
+    "@angular/compiler-cli": "^18.2.3",
+    "@chromatic-com/storybook": "^3.2.2",
+    "@compodoc/compodoc": "^1.1.26",
+    "@schematics/angular": "^18.2.4",
+    "@storybook/angular": "^8.4.4",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.5.4",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jest": "^28.9.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-protractor": "^2.1.1",
+    "eslint-plugin-storybook": "^0.11.0",
+    "husky": "^9.1.6",
+    "jest": "^29.7.0",
+    "jest-preset-angular": "^14.3.1",
+    "lint-staged": "^15.2.10",
+    "postcss": "^8.4.47",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.3.3",
+    "prettier-eslint": "^16.3.0",
+    "storybook": "^8.4.3",
+    "stylelint": "^16.10.0",
+    "stylelint-config-recommended": "^14.0.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
+  },
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint"
+  ],
+  "browserslist": [
+    "last 5 Chrome version",
+    "last 15 Firefox version",
+    "last 4 Edge major versions",
+    "last 4 Safari major versions",
+    "last 2 iOS major versions",
+    "Firefox ESR",
+    "not ios_saf 15.2-15.3",
+    "not safari 15.2-15.3"
+  ]
+}
+
+setup-jest.ts
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+setupZoneTestEnv();
+
+tsconfig.app.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}
+
+tsconfig.eslint.json
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    // adjust "includes" to what makes sense for you and your project
+    "src/**/*.ts",
+    "e2e/**/*.ts"
+  ]
+}
+
+tsconfig.json
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "types": [
+      "node",
+      "jest"
+    ],
+    "baseUrl": "./src",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "noImplicitAny": true,
+    "useDefineForClassFields": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@env/*": [
+        "environments/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@scss/*": [
+        "assets/scss/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "fullTemplateTypeCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "storybook-static"
+  ]
+}
+
+tsconfig.spec.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
+  },
+  "files": [
+    "src/setup-jest.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
+}
+
+.storybook\main.ts
+import type { StorybookConfig } from '@storybook/angular';
+import path from 'path';
+
+const config: StorybookConfig = {
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  addons: [
+    '@storybook/addon-onboarding',
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@chromatic-com/storybook',
+    '@storybook/addon-interactions',
+  ],
+  framework: {
+    name: '@storybook/angular',
+    options: {},
+  },
+  core: {
+    builder: 'webpack5',
+  },
+  webpackFinal: async config => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@app': path.resolve(__dirname, '../src/app'),
+        '@assets': path.resolve(__dirname, '../src/assets'),
+      };
+    }
+    return config;
+  },
+  typescript: {
+    check: false,
+    checkOptions: {},
+  },
+};
+export default config;
+
+.storybook\preview.ts
+import { withActions } from '@storybook/addon-actions/decorator';
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+import { moduleMetadata } from '@storybook/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ZorroAntdModule } from '@app/shared/ng-zorro-antd.module';
+import docJson from '../documentation.json';
+setCompodocJson(docJson);
+
+export const decorators = [
+  moduleMetadata({
+    imports: [CommonModule, BrowserModule, BrowserAnimationsModule, TranslateModule.forRoot(), ZorroAntdModule],
+  }),
+  withActions,
+];
+
+export const parameters = {
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
+    },
+  },
+};
+
+.storybook\tsconfig.doc.json
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "../src/test.ts",
+    "../src/**/*.spec.ts",
+    "../src/**/*.stories.ts"
+  ],
+  "include": [
+    "../src/**/*"
+  ],
+  "files": [
+    "./typings.d.ts"
+  ]
+}
+
+.storybook\tsconfig.json
+{
+  "extends": "../tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
+  "include": ["../src/**/*.stories.*", "./preview.ts"],
+  "files": ["./typings.d.ts"]
+}
+
+.storybook\typings.d.ts
+declare module '*.md' {
+  const content: string;
+  export default content;
+}
+

@@ -23,4 +23,5 @@ module.exports = {
   fakeTimers: {
     enableGlobally: true,
   },
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.module.ts', '!src/**/index.ts'],
 };

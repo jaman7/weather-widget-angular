@@ -1,14 +1,14 @@
+import { MapsTilleLayers, sidebarConfig, TileLayerBackground } from './sidebar-controls.config';
+import { ButtonsControl } from './sidebar-controls.enums';
+import { CheckboxTypes, ISidebarConfig } from './sidebar-controls.models';
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { MapService } from '@app/components/commons/map/map.service';
+import { ExpandCollapseHorizontal } from '@app/shared/animations/animations';
 import { Map as MapView } from 'ol';
 import { easeIn, easeOut } from 'ol/easing';
-import { Observable, Subscription, concatMap, from, interval, of } from 'rxjs';
-import { ExpandCollapseHorizontal } from '@app/shared/animations/animations';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
-import { MapService } from '@app/components/commons/map/map.service';
-import { MapsTilleLayers, sidebarConfig, TileLayerBackground } from './sidebar-controls.config';
-import { CheckboxTypes, ISidebarConfig } from './sidebar-controls.models';
-import { ButtonsControl } from './sidebar-controls.enums';
+import { Observable, Subscription, concatMap, from, interval, of } from 'rxjs';
 
 const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 
@@ -20,10 +20,15 @@ const { BTN_HOME, BTN_ZOOM_IN, BTN_ZOOM_OUT } = ButtonsControl;
 })
 export class SidebarControlsComponent implements OnInit, OnDestroy {
   @Input() mapView!: MapView;
+
   sidebarRightConfig = sidebarConfig();
+
   collapsedSidebarRight$: Observable<boolean> = of(true);
+
   mapsTilleLayers = MapsTilleLayers;
+
   selectedTileLayer = this.mapsTilleLayers?.[0];
+
   selectedBackgroundLayer = TileLayerBackground?.find(layer => layer.checked)?.id || 1;
 
   actions: { [name: string]: () => void } = {
